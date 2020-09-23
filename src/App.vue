@@ -1,16 +1,12 @@
 <template>
   <div id="app">
-    <FundooHome/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import FundooHome from './components/FundooHome'
 export default {
   name: 'App',
-  components:{
-    FundooHome
-  }
 }
 </script>
 
