@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <h1>WELCOME TO FUNDOO APP</h1>
+    <FundooHome/>
   </div>
 </template>
 
 <script>
-
-
+import FundooHome from './components/FundooHome'
 export default {
   name: 'App',
+  components:{
+    FundooHome
+  }
 }
 </script>
 
