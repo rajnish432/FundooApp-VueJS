@@ -1,5 +1,5 @@
 <template>
-    <h1>Welcome To Fundoo App</h1>
+    <router-view></router-view>
 </template>
 
 <script>

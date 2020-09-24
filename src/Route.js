@@ -1,5 +1,5 @@
-import FundooHome from './components/FundooHome'
+import FundooLogin from './components/FundooLogin'
 
 export default[
-    {path:'/', component:FundooHome}
+    {path:'/', component:FundooLogin}
 ]

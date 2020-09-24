@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <FundooHome/>
   </div>
 </template>
 
 <script>
+import FundooHome from './components/FundooHome'
 export default {
   name: 'App',
+  components:{
+    FundooHome
+  }
 }
 </script>
 
 <style>
 #app {
   width: 100%;
-  border: 1px solid;
-  height: 400px;
+  min-height: 750px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,6 +25,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  background-color: white;
   color: #2c3e50;
 }
 </style>
