@@ -14,7 +14,7 @@
       <label>Password*</label>
       <md-input v-model="type" type="password"></md-input>
     </md-field>
-    <div class="loginbtn"><button type="submit">Login</button></div>
+    <div class="loginbtn"><button type="submit">Log In</button></div>
     <div class="back">Forget Password?</div>
   <div class="back">Create Account</div>
   </div>
@@ -82,6 +82,8 @@ p {
     padding: 0 16px;
     border-radius: 2px;
     overflow: visible;
+    font-weight: 500;
+    font-size: 15px;
     background-color: #3e3eee;
 }
 
@@ -93,4 +95,27 @@ p {
     flex-direction: row;
     width:100%;
 }
+
+@media screen and (max-width: 800px) {
+  .login-container {
+    width: 60%;
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .login-container{
+    width: 88%;
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .login-container {
+    width: 90%;
+    margin-top: 50px;
+  }
+}
+
+
 </style>
