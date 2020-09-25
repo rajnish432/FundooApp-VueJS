@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <FundooHome/>
+    <FundooMain />
   </div>
 </template>
 
 <script>
-import FundooHome from './components/FundooHome'
+import FundooMain from "./components/FundooMain";
 export default {
-  name: 'App',
-  components:{
-    FundooHome
-  }
-}
+  name: "App",
+  components: {
+    FundooMain,
+  },
+};
 </script>
 
 <style>

@@ -1,28 +1,64 @@
 <template>
   <div class="login-container">
-    <div id="label"><a>F</a>u<a2>n</a2><a>d</a><a4>o</a4>o</div>
-    <br />
+    <div id="label">
+      <a>F</a>u<span class="a2">n</span><a>d</a><span class="a4">o</span>o
+    </div>
     <h2>Sign in</h2>
-    <br />
-    <p>Continue to Fundoo</p>
+    <h3>Continue to Fundoo</h3>
     <br />
     <md-field>
-      <label>Email Id*</label>
-      <md-input v-model="type"></md-input>
+      <label>Email Id</label>
+      <md-input v-model="email" required></md-input>
+      <span class="md-error">Email is Required</span>
     </md-field>
     <md-field>
-      <label>Password*</label>
-      <md-input v-model="type" type="password"></md-input>
+      <label>Password</label>
+      <md-input type="password" v-model="password" required></md-input>
+      <span class="md-error">Password is Required</span>
     </md-field>
-    <div class="loginbtn"><button type="submit">Log In</button></div>
-    <div class="back">Forget Password?</div>
-  <div class="back">Create Account</div>
+    <div class="loginbtn">
+      <div class="back">
+        <a href="http://fundoonotes.incubation.bridgelabz.com/signup"
+          >Create Account</a
+        >
+      </div>
+      <md-button class="md-raised md-primary" @click="login">Log In</md-button>
+    </div>
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import service from "../services/FundooService";
+
 export default {
   name: "FundooLogin",
+  data() {
+    return {
+      cartID: "",
+      email: "",
+      password: "",
+      result: "",
+    };
+  },
+  methods: {
+    login: function () {
+      const loginData = {
+        cartID: this.cartID,
+        email: this.email,
+        password: this.password,
+      };
+      service.getUserLoggedIn(loginData).then((response) => {
+        this.result = response.data;
+        console.log(this.result.email);
+        this.$router.push("home");
+      }),
+        (error) => {
+          console.log(error);
+        };
+    },
+  },
 };
 </script>
 <style scoped>
@@ -31,11 +67,11 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 32%;
-  padding: 24px;
-  margin-top: 5%;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  width: 28%;
+  padding: 40px;
+  margin-top: 10%;
+  border: 0.4px solid silver;
+  border-radius: 7px;
 }
 
 #label {
@@ -51,18 +87,19 @@ a {
   color: blue;
 }
 
-a2 {
+.a2 {
   color: #f0b000;
 }
 
-a4 {
+.a4 {
   color: #038803;
 }
 
-p {
-  font-size: 25px;
-  font-weight: 400;
+h3 {
+  font-size: 20px;
+  font-weight: 300;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
 }
@@ -71,29 +108,28 @@ p {
   place-content: stretch flex-end;
   align-items: stretch;
   flex-direction: row;
-  box-sizing: border-box;
   display: flex;
   width: 100%;
 }
 
-.loginbtn>button{
-      min-width: 88px;
-    line-height: 36px;
-    padding: 0 16px;
-    border-radius: 2px;
-    overflow: visible;
-    font-weight: 500;
-    font-size: 15px;
-    background-color: #3e3eee;
+.loginbtn > button {
+  min-width: 88px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 2px;
+  overflow: visible;
+  font-weight: 500;
+  font-size: 15px;
+  background-color: #1b66ca;
 }
 
 .back {
-    color: #0606f8;
-    cursor: pointer;
-    margin: 5px 0px 0px 0px;
-    display: flex;
-    flex-direction: row;
-    width:100%;
+  color: #0606f8;
+  cursor: pointer;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 @media screen and (max-width: 800px) {
@@ -104,7 +140,7 @@ p {
 }
 
 @media screen and (max-width: 420px) {
-  .login-container{
+  .login-container {
     width: 88%;
     margin-top: 50px;
   }
@@ -116,6 +152,4 @@ p {
     margin-top: 50px;
   }
 }
-
-
 </style>

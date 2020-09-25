@@ -1,12 +1,15 @@
 <template>
-    <router-view></router-view>
+  <FundooNavBar />
 </template>
 
 <script>
+import FundooNavBar from "./FundooNavBar";
 export default {
-    name:'FundooHome',
-}
+  name: "FundooHome",
+  components: {
+    FundooNavBar,
+  },
+};
 </script>
 <style scoped>
-
 </style>
