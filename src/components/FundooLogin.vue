@@ -18,7 +18,7 @@
     </md-field>
     <div class="loginbtn">
       <div class="back">
-        <a href="http://fundoonotes.incubation.bridgelabz.com/signup"
+        <a href="http://fundoonotes.incubation.bridgelabz.com"
           >Create Account</a
         >
       </div>
@@ -51,7 +51,6 @@ export default {
       };
       service.getUserLoggedIn(loginData).then((response) => {
         this.result = response.data;
-        console.log(this.result.email);
         this.$router.push("home");
       }),
         (error) => {
