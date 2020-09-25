@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import service from "../services/FundooService";
+import userService from "../services/UserService";
 
 export default {
   name: "FundooLogin",
@@ -49,12 +49,12 @@ export default {
         email: this.email,
         password: this.password,
       };
-      service.getUserLoggedIn(loginData).then((response) => {
+      userService.getUserLoggedIn(loginData).then((response) => {
         this.result = response.data;
         this.$router.push("home");
       }),
         (error) => {
-          console.log(error);
+          console.log(error.message);
         };
     },
   },

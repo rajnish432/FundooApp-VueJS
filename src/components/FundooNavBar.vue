@@ -115,6 +115,7 @@ export default {
 
 .md-toolbar .md-autocomplete.md-theme-default.md-autocomplete-box {
   height: 50px;
+  border-radius: 7px;
 }
 
 .md-drawer.md-theme-default.md-persistent-mini.md-left {

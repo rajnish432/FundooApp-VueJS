@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const URL = 'http://fundoonotes.incubation.bridgelabz.com/api/user/login'
+const URL = process.env.VUE_APP_BACKEND_URL
 
 export default {
-    post(DTO) {
+    post(login,DTO) {
         return axios({
             method: 'post',
-            url: `${URL}`,
+            url: `${URL}/${login}`,
             data: DTO,
         })
     },
