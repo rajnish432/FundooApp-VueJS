@@ -51,6 +51,7 @@ export default {
       };
       userService.getUserLoggedIn(loginData).then((response) => {
         this.result = response.data;
+        localStorage.setItem('token',response.data.id)
         this.$router.push("home");
       }),
         (error) => {

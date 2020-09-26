@@ -28,42 +28,47 @@
         </div>
       </md-toolbar>
     </div>
-    <md-drawer
-      :md-active.sync="showNavigation"
-      md-swipeable
-      md-persistent="mini"
-    >
-      <md-list>
-        <md-list-item>
-          <md-icon>emoji_objects</md-icon>
-          <span class="md-list-item-text">Notes</span>
-        </md-list-item>
+    <div class="navbar">
+      <md-drawer
+        :md-active.sync="showNavigation"
+        md-swipeable
+        md-persistent="mini"
+      >
+        <md-list>
+          <md-list-item>
+            <md-icon>emoji_objects</md-icon>
+            <span class="md-list-item-text">Notes</span>
+          </md-list-item>
 
-        <md-list-item>
-          <md-icon>notifications</md-icon>
-          <span class="md-list-item-text">Reminders</span>
-        </md-list-item>
+          <md-list-item>
+            <md-icon>notifications</md-icon>
+            <span class="md-list-item-text">Reminders</span>
+          </md-list-item>
 
-        <md-list-item>
-          <md-icon>edit</md-icon>
-          <span class="md-list-item-text">Edit Labels</span>
-        </md-list-item>
+          <md-list-item>
+            <md-icon>edit</md-icon>
+            <span class="md-list-item-text">Edit Labels</span>
+          </md-list-item>
 
-        <md-list-item>
-          <md-icon>archive</md-icon>
-          <span class="md-list-item-text">Archive</span>
-        </md-list-item>
+          <md-list-item>
+            <md-icon>archive</md-icon>
+            <span class="md-list-item-text">Archive</span>
+          </md-list-item>
 
-        <md-list-item>
-          <md-icon>delete</md-icon>
-          <span class="md-list-item-text">Trash</span>
-        </md-list-item>
-      </md-list>
-    </md-drawer>
+          <md-list-item>
+            <md-icon>delete</md-icon>
+            <span class="md-list-item-text">Trash</span>
+          </md-list-item>
+        </md-list>
+      </md-drawer>
+      <FundooCreateNote />
+    </div>
   </div>
 </template>
 
 <script>
+import FundooCreateNote from './FundooCreateNote'
+
 export default {
   name: "FundooNavBar",
   data() {
@@ -74,6 +79,11 @@ export default {
       keepsrc: "keep.png",
     };
   },
+
+  components:{
+    FundooCreateNote
+  },
+
   methods: {
     showNavigationSlider: function () {
       if (this.showNavigation == false) {
