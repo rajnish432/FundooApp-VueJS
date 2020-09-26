@@ -30,19 +30,13 @@
 <script>
 import FundooColorPalette from "./FundooColorPalette";
 import FundooArchive from "./FundooArchive";
+import UserService from '../services/UserService'
 
 export default {
   data(){
     return{
       title:'',
-      description:'',
-      isPined:false,
-      color:'#FFFFFF',
-      isArchived:false,
-      labelldList:[],
-      reminder:'',
-      collaborators:[],
-      responseData:'',
+      description:''
     }
   },
   components: {
@@ -55,6 +49,16 @@ export default {
       document.getElementById("header").style.display = "none";
     },
     closeNoteSpace: function () {
+       const note={
+        title:this.title,
+        description:this.description
+      }
+
+      UserService.addNote(note).then((response)=>{
+        this.responseData=response.data
+        this.title='';
+        this.description='';
+      })
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
     },

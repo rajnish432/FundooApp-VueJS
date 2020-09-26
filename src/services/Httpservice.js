@@ -7,7 +7,11 @@ export default {
         return axios({
             method: 'post',
             url: `${URL}/${login}`,
-            data: DTO,        
+            data: DTO,  
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization':localStorage.getItem('token')
+            }       
         })
     },
 }
