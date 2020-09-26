@@ -8,11 +8,11 @@
         <md-card id="note-card">
           <md-field md-inline>
             <label>Title</label>
-            <md-input v-model="inline"></md-input> </md-field
+            <md-input v-model="title"></md-input> </md-field
           ><br />
           <md-field md-inline>
             <label>Take a note</label>
-            <md-textarea v-model="inline" md-autogrow></md-textarea> </md-field
+            <md-textarea v-model="description" md-autogrow></md-textarea> </md-field
           ><br />
           <div class="notebox-icons">
             <span>
@@ -32,6 +32,19 @@ import FundooColorPalette from "./FundooColorPalette";
 import FundooArchive from "./FundooArchive";
 
 export default {
+  data(){
+    return{
+      title:'',
+      description:'',
+      isPined:false,
+      color:'#FFFFFF',
+      isArchived:false,
+      labelldList:[],
+      reminder:'',
+      collaborators:[],
+      responseData:'',
+    }
+  },
   components: {
     FundooColorPalette,
     FundooArchive,
@@ -42,11 +55,16 @@ export default {
       document.getElementById("header").style.display = "none";
     },
     closeNoteSpace: function () {
-      console.log("here");
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
     },
   },
+  created(){
+    if(localStorage.getItem('token')==undefined)
+    {
+      this.$router.push("/");
+    }
+  }
 };
 </script>
 

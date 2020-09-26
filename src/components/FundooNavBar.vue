@@ -108,6 +108,13 @@ export default {
   align-items: center;
 }
 
+.md-list-item:hover{  
+  cursor: pointer; 
+  background-color: whitesmoke;
+  border-top-right-radius: 20px ;  
+  border-bottom-right-radius: 20px ;  
+  }
+
 .md-toolbar.md-theme-default.md-primary {
   background-color: transparent;
   box-shadow: none;

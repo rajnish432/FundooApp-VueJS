@@ -7,7 +7,7 @@ export default {
         return axios({
             method: 'post',
             url: `${URL}/${login}`,
-            data: DTO,
+            data: DTO,        
         })
     },
 }
