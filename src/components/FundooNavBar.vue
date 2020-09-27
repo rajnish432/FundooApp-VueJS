@@ -32,6 +32,7 @@
       <md-drawer
         :md-active.sync="showNavigation"
         md-swipeable
+        md-permanent="clipped"
         md-persistent="mini"
       >
         <md-list>
@@ -67,7 +68,7 @@
 </template>
 
 <script>
-import FundooCreateNote from './FundooCreateNote'
+import FundooCreateNote from "./FundooCreateNote";
 
 export default {
   name: "FundooNavBar",
@@ -80,8 +81,8 @@ export default {
     };
   },
 
-  components:{
-    FundooCreateNote
+  components: {
+    FundooCreateNote,
   },
 
   methods: {
@@ -108,12 +109,12 @@ export default {
   align-items: center;
 }
 
-.md-list-item:hover{  
-  cursor: pointer; 
+.md-list-item:hover {
+  cursor: pointer;
   background-color: whitesmoke;
-  border-top-right-radius: 20px ;  
-  border-bottom-right-radius: 20px ;  
-  }
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
 
 .md-toolbar.md-theme-default.md-primary {
   background-color: transparent;
@@ -127,6 +128,8 @@ export default {
 
 .search {
   max-width: 650px;
+  display: flex;
+  flex-direction: row;
   background-color: rgb(243, 240, 240) !important;
 }
 

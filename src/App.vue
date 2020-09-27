@@ -19,7 +19,6 @@ export default {
   width: 100%;
   min-height: 750px;
   display: flex;
-  overflow: hidden;
   flex-direction: column;
   align-items: center;
   font-family: Avenir, Helvetica, Arial, sans-serif;

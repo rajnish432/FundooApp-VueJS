@@ -9,6 +9,10 @@ class UserService {
     addNote(data){
         return httpservice.post('notes/addNotes',data)
     }
+
+    fetchNotesList(){
+        return httpservice.get('notes/getNotesList')
+    }
 }
 
 export default new UserService

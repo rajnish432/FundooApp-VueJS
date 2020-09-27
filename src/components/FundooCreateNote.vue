@@ -12,7 +12,10 @@
           ><br />
           <md-field md-inline>
             <label>Take a note</label>
-            <md-textarea v-model="description" md-autogrow></md-textarea> </md-field
+            <md-textarea
+              v-model="description"
+              md-autogrow
+            ></md-textarea> </md-field
           ><br />
           <div class="notebox-icons">
             <span>
@@ -24,24 +27,27 @@
         </md-card>
       </div>
     </div>
+    <FundooNotes />
   </div>
 </template>
 
 <script>
 import FundooColorPalette from "./FundooColorPalette";
 import FundooArchive from "./FundooArchive";
-import UserService from '../services/UserService'
+import UserService from "../services/UserService";
+import FundooNotes from "./FundooNotes";
 
 export default {
-  data(){
-    return{
-      title:'',
-      description:''
-    }
+  data() {
+    return {
+      title: "",
+      description: "",
+    };
   },
   components: {
     FundooColorPalette,
     FundooArchive,
+    FundooNotes,
   },
   methods: {
     openNoteSpace: function () {
@@ -49,26 +55,24 @@ export default {
       document.getElementById("header").style.display = "none";
     },
     closeNoteSpace: function () {
-       const note={
-        title:this.title,
-        description:this.description
-      }
-
-      UserService.addNote(note).then((response)=>{
-        this.responseData=response.data
-        this.title='';
-        this.description='';
-      })
+      const note = {
+        title: this.title,
+        description: this.description,
+      };
+      UserService.addNote(note).then((response) => {
+        this.responseData = response.data;
+        this.title = "";
+        this.description = "";
+      });
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
     },
   },
-  created(){
-    if(localStorage.getItem('token')==undefined)
-    {
+  created() {
+    if (localStorage.getItem("token") == undefined) {
       this.$router.push("/");
     }
-  }
+  },
 };
 </script>
 
@@ -76,6 +80,7 @@ export default {
 .flex-properties {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .create-note {
   width: 85%;
@@ -85,11 +90,11 @@ export default {
 .note {
   border-radius: 7px;
   width: 40%;
-  margin-top: 5%;
+  margin-top: 2%;
   align-items: flex-start;
   justify-content: center;
   cursor: text;
-  margin-left: 35%;
+  margin-left: 6%;
   box-shadow: 2px 3px 5px #e2e2e2;
   padding: 10px;
   font-weight: 600;
@@ -142,5 +147,9 @@ export default {
 span {
   display: flex;
   flex-direction: row;
+}
+
+#header {
+  opacity: 0.6;
 }
 </style>
