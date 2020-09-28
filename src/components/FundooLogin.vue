@@ -6,12 +6,12 @@
     <h2>Sign in</h2>
     <h3>Continue to Fundoo</h3>
     <br />
-    <md-field>
+    <md-field :class="emailValidation">
       <label>Email Id</label>
       <md-input v-model="email" required></md-input>
       <span class="md-error">Email is Required</span>
     </md-field>
-    <md-field>
+    <md-field :class="passwordValidation">
       <label>Password</label>
       <md-input type="password" v-model="password" required></md-input>
       <span class="md-error">Password is Required</span>
@@ -40,10 +40,21 @@ export default {
       email: "",
       password: "",
       result: "",
+      hasEmailError: false,
+      hasPasswordError:false
     };
   },
   methods: {
     login: function () {
+      if (this.email == "" && this.password == "") {
+        return (this.hasEmailError = true),(this.hasPasswordError=true);
+      }
+      if(this.email==""){
+        return (this.hasEmailError = true),(this.hasPasswordError=false);
+      }
+      if(this.password==""){
+        return (this.hasEmailError = false),(this.hasPasswordError=true);
+      }
       const loginData = {
         cartID: this.cartID,
         email: this.email,
@@ -51,12 +62,25 @@ export default {
       };
       userService.getUserLoggedIn(loginData).then((response) => {
         this.result = response.data;
-        localStorage.setItem('token',response.data.id)
-        this.$router.push("home");
+        localStorage.setItem("token", response.data.id);
+        setTimeout(() => this.$router.push("home"), 3000);
       }),
         (error) => {
           console.log(error.message);
         };
+      return (this.hasEmailError = false),(this.hasPasswordError=false);
+    },
+  },
+  computed: {
+    emailValidation() {
+      return {
+        "md-invalid": this.hasEmailError,
+      };
+    },
+    passwordValidation() {
+      return {
+        "md-invalid": this.hasPasswordError,
+      };
     },
   },
 };

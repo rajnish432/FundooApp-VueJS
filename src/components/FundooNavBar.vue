@@ -36,7 +36,7 @@
         md-persistent="mini"
       >
         <md-list>
-          <md-list-item>
+          <md-list-item @click="goTo('Notes')">
             <md-icon>emoji_objects</md-icon>
             <span class="md-list-item-text">Notes</span>
           </md-list-item>
@@ -92,6 +92,11 @@ export default {
       }
       this.showNavigation = false;
     },
+    goTo:function(pageName){
+      if(pageName=="Notes"){
+        this.$router.push("home");
+      }
+    }
   },
 };
 </script>
