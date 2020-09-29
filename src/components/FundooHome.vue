@@ -4,6 +4,7 @@
 
 <script>
 import FundooNavBar from "./FundooNavBar";
+
 export default {
   name: "FundooHome",
   components: {

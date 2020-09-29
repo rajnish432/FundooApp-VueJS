@@ -13,6 +13,14 @@ class UserService {
     fetchNotesList(){
         return httpservice.get('notes/getNotesList')
     }
+
+    moveToTrash(trashData){
+        return httpservice.post('notes/trashNotes',trashData)
+    }
+
+    fetchTrashNotesList(){
+        return httpservice.get('notes/getTrashNotesList')
+    }
 }
 
 export default new UserService

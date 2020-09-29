@@ -36,39 +36,45 @@
         md-persistent="mini"
       >
         <md-list>
-          <md-list-item @click="goTo('Notes')">
+          <md-list-item @click="goTo('Notes')" id="Notes">
             <md-icon>emoji_objects</md-icon>
             <span class="md-list-item-text">Notes</span>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item @click="goTo('Reminders')" id="Reminders">
             <md-icon>notifications</md-icon>
             <span class="md-list-item-text">Reminders</span>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item @click="goTo('Labels')" id="Labels">
             <md-icon>edit</md-icon>
             <span class="md-list-item-text">Edit Labels</span>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item @click="goTo('Archive')" id="Archive">
             <md-icon>archive</md-icon>
             <span class="md-list-item-text">Archive</span>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item @click="goTo('Trash')" id="Trash">
             <md-icon>delete</md-icon>
             <span class="md-list-item-text">Trash</span>
           </md-list-item>
         </md-list>
       </md-drawer>
-      <FundooCreateNote />
+      <div v-if="selected == 'Notes'" class="component">
+        <FundooCreateNote />
+      </div>
+      <div v-if="selected == 'Trash'" class="component">
+        <FundooTrash />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import FundooCreateNote from "./FundooCreateNote";
+import FundooTrash from "./FundooTrash";
 
 export default {
   name: "FundooNavBar",
@@ -78,11 +84,13 @@ export default {
       showNavigation: false,
       noteList: [],
       keepsrc: "keep.png",
+      selected: "Notes",
     };
   },
 
   components: {
     FundooCreateNote,
+    FundooTrash,
   },
 
   methods: {
@@ -92,11 +100,19 @@ export default {
       }
       this.showNavigation = false;
     },
-    goTo:function(pageName){
-      if(pageName=="Notes"){
+    goTo: function (selectedOption) {
+      var styleproperty = document.getElementById(selectedOption).style;
+      if (this.selected.length != 0) {
+        document.getElementById(this.selected).setAttribute("style", "");
+      }
+      styleproperty.backgroundColor = "#888785";
+      styleproperty.borderTopRightRadius = "20px";
+      styleproperty.borderBottomRightRadius = "20px";
+      this.selected = selectedOption;
+      if (selectedOption == "Notes") {
         this.$router.push("home");
       }
-    }
+    },
   },
 };
 </script>
@@ -156,5 +172,9 @@ export default {
 
 img {
   width: 12%;
+}
+
+.component {
+  width: 85%;
 }
 </style>

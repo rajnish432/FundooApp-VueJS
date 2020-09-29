@@ -1,7 +1,7 @@
 <template>
   <div class="display-notes">
     <div class="note-cards" v-for="note in noteList" v-bind:key="note">
-      <md-card>
+      <md-card @click.native="getID(note)">
         <label class="content">{{ note.title }}</label
         ><br />
         <label class="description content">{{ note.description }}</label
@@ -9,7 +9,7 @@
         <div class="notebox-icons">
           <FundooColorPalette />
           <FundooArchive />
-          <FundooMore />
+          <FundooDelete />
         </div>
       </md-card>
     </div>
@@ -19,29 +19,42 @@
 import UserService from "../services/UserService";
 import FundooColorPalette from "./FundooColorPalette";
 import FundooArchive from "./FundooArchive";
-import FundooMore from "./FundooMore";
+import FundooDelete from "./FundooDelete";
+import { eventBus } from "../main";
 
 export default {
   name: "FundooNotes",
   data() {
     return {
       noteList: [],
+      cardId: [],
     };
   },
   components: {
     FundooColorPalette,
     FundooArchive,
-    FundooMore,
+    FundooDelete,
   },
   methods: {
     fetchNotes: function () {
       UserService.fetchNotesList().then((response) => {
-        this.noteList = response.data.data.data;
+        response.data.data.data.forEach((element) => {
+          if (element.isDeleted == false && element.isArchived == false) {
+            this.noteList.push(element);
+          }
+        });
       });
     },
+    getID: function (data) {
+      this.cardId = data.id;
+      eventBus.$emit("getNoteId", this.cardId);
+    },
   },
-  mounted() {
+  created() {
     this.fetchNotes();
+    eventBus.$on("getUpdatedNoteList", (data) => {
+      this.noteList = data;
+    });
   },
 };
 </script>
@@ -51,8 +64,7 @@ export default {
   margin-top: 2%;
   margin-left: 18%;
   flex-direction: row;
-  max-width: 750px;
-  min-width: 750px;
+  width: 60%;
   flex-wrap: wrap;
 }
 

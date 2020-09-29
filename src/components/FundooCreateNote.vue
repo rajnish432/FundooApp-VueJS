@@ -36,12 +36,14 @@ import FundooColorPalette from "./FundooColorPalette";
 import FundooArchive from "./FundooArchive";
 import UserService from "../services/UserService";
 import FundooNotes from "./FundooNotes";
+import {eventBus} from '../main'
 
 export default {
   data() {
     return {
       title: "",
       description: "",
+      noteList:[]
     };
   },
   components: {
@@ -50,6 +52,15 @@ export default {
     FundooNotes,
   },
   methods: {
+    fetchNotes: function () {
+      UserService.fetchNotesList().then((response) => {
+        response.data.data.data.forEach((element) => {
+          if (element.isDeleted == false && element.isArchived == false) {
+            this.noteList.push(element);
+          }
+        });
+      });
+    },
     openNoteSpace: function () {
       document.getElementById("note-card").style.display = "flex";
       document.getElementById("header").style.display = "none";
@@ -66,6 +77,8 @@ export default {
       });
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
+      this.fetchNotes();
+        eventBus.$emit("getUpdatedNoteList", this.noteList);
     },
   },
   created() {
@@ -83,7 +96,7 @@ export default {
   align-items: center;
 }
 .create-note {
-  width: 85%;
+  width: 100%;
   height: 684px;
 }
 

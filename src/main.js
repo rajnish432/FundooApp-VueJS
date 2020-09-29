@@ -10,6 +10,8 @@ Vue.use(VueMaterial)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
+export const eventBus=new Vue();
+
 const router = new VueRouter({
   mode:'history',
   routes: Routes
