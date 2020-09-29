@@ -12,7 +12,9 @@
         ><br />
         <div class="notebox-icons">
           <md-icon @click.native="deletePermanently(note.id)">delete</md-icon>
-          <md-icon>restore_from_trash</md-icon>
+          <md-icon @click.native="restoreFromTrash(note.id)"
+            >restore_from_trash</md-icon
+          >
         </div>
       </md-card>
     </div>
@@ -33,16 +35,25 @@ export default {
         this.trashList = response.data.data.data;
       });
     },
-    deletePermanently:function(noteId){
-        const data={
-            noteIdList:[noteId]
-        }
-        UserService.deleteForever(data).then((response)=>{
-            console.log(response.data);
-            this.trashList=[]
-            this.fetchTrashList();
-        })
-    }
+    deletePermanently: function (noteId) {
+      const data = {
+        noteIdList: [noteId],
+      };
+      UserService.deleteForever(data).then(() => {
+        this.trashList = [];
+        this.fetchTrashList();
+      });
+    },
+    restoreFromTrash: function (noteId) {
+      const noteData = {
+        isDeleted: false,
+        noteIdList: [noteId],
+      };
+      UserService.restoreTrashNotes(noteData).then(() => {
+        this.trashList = [];
+        this.fetchTrashList();
+      });
+    },
   },
   created() {
     this.fetchTrashList();
@@ -93,8 +104,12 @@ export default {
   font-weight: 500;
 }
 
-.notebox-icons{
-    display: flex;
-    justify-content: space-between;
+.notebox-icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.md-icon {
+  cursor: pointer;
 }
 </style>
