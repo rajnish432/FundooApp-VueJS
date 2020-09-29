@@ -53,7 +53,9 @@ export default {
   created() {
     this.fetchNotes();
     eventBus.$on("getUpdatedNoteList", (data) => {
-      this.noteList = data;
+      if (!this.noteList.includes(data)) {
+        this.noteList = data;
+      }
     });
   },
 };
@@ -61,7 +63,7 @@ export default {
 <style scoped>
 .display-notes {
   display: flex;
-  margin-top: 2%;
+  margin-top: 1%;
   margin-left: 18%;
   flex-direction: row;
   width: 60%;

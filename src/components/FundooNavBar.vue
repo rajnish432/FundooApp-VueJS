@@ -148,7 +148,7 @@ export default {
 }
 
 .search {
-  max-width: 650px;
+  max-width: 44%;
   display: flex;
   flex-direction: row;
   background-color: rgb(243, 240, 240) !important;
@@ -161,7 +161,7 @@ export default {
 
 .md-drawer.md-theme-default.md-persistent-mini.md-left {
   width: 15%;
-  height: 684px;
+  min-height: 684px;
   margin-top: 1px;
 }
 
