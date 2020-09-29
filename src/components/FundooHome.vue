@@ -1,14 +1,14 @@
 <template>
-  <FundooNavBar />
+  <NavBar />
 </template>
 
 <script>
-import FundooNavBar from "./FundooNavBar";
+import NavBar from "./NavBar";
 
 export default {
   name: "FundooHome",
   components: {
-    FundooNavBar,
+    NavBar,
   },
 };
 </script>

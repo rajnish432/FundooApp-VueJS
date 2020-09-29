@@ -8,7 +8,7 @@
 import { eventBus } from "../main";
 import NoteService from "../services/NoteService";
 export default {
-  name: "FundooDelete",
+  name: "DeleteIcon",
   data() {
     return {
       cartId: [],

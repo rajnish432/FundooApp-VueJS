@@ -63,21 +63,21 @@
         </md-list>
       </md-drawer>
       <div v-if="selected == 'Notes'" class="component">
-        <FundooCreateNote />
+        <CreateNote />
       </div>
       <div v-if="selected == 'Trash'" class="component">
-        <FundooTrash />
+        <Trash />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import FundooCreateNote from "./FundooCreateNote";
-import FundooTrash from "./FundooTrash";
+import CreateNote from "./CreateNote";
+import Trash from "./Trash";
 
 export default {
-  name: "FundooNavBar",
+  name: "NavBar",
   data() {
     return {
       searchResult: null,
@@ -89,8 +89,8 @@ export default {
   },
 
   components: {
-    FundooCreateNote,
-    FundooTrash,
+    CreateNote,
+    Trash,
   },
 
   methods: {

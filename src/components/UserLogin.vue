@@ -33,7 +33,7 @@
 import userService from "../services/UserService";
 
 export default {
-  name: "FundooLogin",
+  name: "UserLogin",
   data() {
     return {
       cartID: "",

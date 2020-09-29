@@ -23,7 +23,7 @@
 <script>
 import NoteService from "../services/NoteService";
 export default {
-  name: "FundooTrash",
+  name: "Trash",
   data() {
     return {
       trashList: [],

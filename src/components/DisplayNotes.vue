@@ -7,9 +7,9 @@
         <label class="description content">{{ note.description }}</label
         ><br />
         <div class="notebox-icons">
-          <FundooColorPalette />
-          <FundooArchive />
-          <FundooDelete />
+          <ColorPaletteIcon />
+          <ArchiveIcon />
+          <DeleteIcon />
         </div>
       </md-card>
     </div>
@@ -17,13 +17,13 @@
 </template>
 <script>
 import NoteService from "../services/NoteService";
-import FundooColorPalette from "./FundooColorPalette";
-import FundooArchive from "./FundooArchive";
-import FundooDelete from "./FundooDelete";
+import ColorPaletteIcon from "./ColorPaletteIcon";
+import ArchiveIcon from "./ArchiveIcon";
+import DeleteIcon from "./DeleteIcon";
 import { eventBus } from "../main";
 
 export default {
-  name: "FundooNotes",
+  name: "DisplayNotes",
   data() {
     return {
       noteList: [],
@@ -31,9 +31,9 @@ export default {
     };
   },
   components: {
-    FundooColorPalette,
-    FundooArchive,
-    FundooDelete,
+    ColorPaletteIcon,
+    ArchiveIcon,
+    DeleteIcon,
   },
   methods: {
     fetchNotes: function () {

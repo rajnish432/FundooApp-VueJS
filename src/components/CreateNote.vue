@@ -19,23 +19,23 @@
           ><br />
           <div class="notebox-icons">
             <span>
-              <FundooColorPalette />
-              <FundooArchive />
+              <ColorPaletteIcon />
+              <ArchiveIcon />
             </span>
             <button @click="closeNoteSpace()">Close</button>
           </div>
         </md-card>
       </div>
     </div>
-    <FundooNotes />
+    <DisplayNotes />
   </div>
 </template>
 
 <script>
-import FundooColorPalette from "./FundooColorPalette";
-import FundooArchive from "./FundooArchive";
+import ColorPaletteIcon from "./ColorPaletteIcon";
+import ArchiveIcon from "./ArchiveIcon";
 import NoteService from "../services/NoteService";
-import FundooNotes from "./FundooNotes";
+import DisplayNotes from "./DisplayNotes";
 import { eventBus } from "../main";
 
 export default {
@@ -47,9 +47,9 @@ export default {
     };
   },
   components: {
-    FundooColorPalette,
-    FundooArchive,
-    FundooNotes,
+    ColorPaletteIcon,
+    ArchiveIcon,
+    DisplayNotes,
   },
   methods: {
     fetchNotes: function () {
