@@ -10,6 +10,10 @@
         ><br />
         <label class="description content">{{ note.description }}</label
         ><br />
+        <div class="notebox-icons">
+          <md-icon @click.native="deletePermanently(note.id)">delete</md-icon>
+          <md-icon>restore_from_trash</md-icon>
+        </div>
       </md-card>
     </div>
   </div>
@@ -29,6 +33,16 @@ export default {
         this.trashList = response.data.data.data;
       });
     },
+    deletePermanently:function(noteId){
+        const data={
+            noteIdList:[noteId]
+        }
+        UserService.deleteForever(data).then((response)=>{
+            console.log(response.data);
+            this.trashList=[]
+            this.fetchTrashList();
+        })
+    }
   },
   created() {
     this.fetchTrashList();
@@ -41,7 +55,7 @@ export default {
   flex-direction: row;
 }
 .trash-main {
-  margin-left: 10%;
+  margin-left: 20%;
   width: 60%;
   height: 684px;
   justify-content: center;
@@ -77,5 +91,10 @@ export default {
 .description {
   font-size: 16px;
   font-weight: 500;
+}
+
+.notebox-icons{
+    display: flex;
+    justify-content: space-between;
 }
 </style>

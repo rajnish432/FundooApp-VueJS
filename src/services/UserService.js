@@ -21,6 +21,10 @@ class UserService {
     fetchTrashNotesList(){
         return httpservice.get('notes/getTrashNotesList')
     }
+
+    deleteForever(noteId){
+        return httpservice.post('notes/deleteForeverNotes',noteId)
+    }
 }
 
 export default new UserService
