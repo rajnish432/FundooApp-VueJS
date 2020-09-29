@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import UserService from "../services/UserService";
+import NoteService from "../services/NoteService";
 export default {
   name: "FundooTrash",
   data() {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     fetchTrashList: function () {
-      UserService.fetchTrashNotesList().then((response) => {
+      NoteService.fetchTrashNotesList().then((response) => {
         this.trashList = response.data.data.data;
       });
     },
@@ -39,7 +39,7 @@ export default {
       const data = {
         noteIdList: [noteId],
       };
-      UserService.deleteForever(data).then(() => {
+      NoteService.deleteForever(data).then(() => {
         this.trashList = [];
         this.fetchTrashList();
       });
@@ -49,7 +49,7 @@ export default {
         isDeleted: false,
         noteIdList: [noteId],
       };
-      UserService.restoreTrashNotes(noteData).then(() => {
+      NoteService.restoreTrashNotes(noteData).then(() => {
         this.trashList = [];
         this.fetchTrashList();
       });

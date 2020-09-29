@@ -161,8 +161,7 @@ export default {
 
 .md-drawer.md-theme-default.md-persistent-mini.md-left {
   width: 15%;
-  min-height: 684px;
-  margin-top: 1px;
+  min-height: 90vh;
 }
 
 .md-title {
@@ -176,5 +175,7 @@ img {
 
 .component {
   width: 85%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

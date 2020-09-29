@@ -1,6 +1,6 @@
 <template>
   <div class="display-notes">
-    <div class="note-cards" v-for="note in noteList" v-bind:key="note">
+    <div class="note-cards" v-for="note in noteList" v-bind:key="note.id">
       <md-card @click.native="getID(note)">
         <label class="content">{{ note.title }}</label
         ><br />
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import UserService from "../services/UserService";
+import NoteService from "../services/NoteService";
 import FundooColorPalette from "./FundooColorPalette";
 import FundooArchive from "./FundooArchive";
 import FundooDelete from "./FundooDelete";
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     fetchNotes: function () {
-      UserService.fetchNotesList().then((response) => {
+      NoteService.fetchNotesList().then((response) => {
         response.data.data.data.forEach((element) => {
           if (element.isDeleted == false && element.isArchived == false) {
             this.noteList.push(element);

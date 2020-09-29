@@ -6,7 +6,7 @@
 
 <script>
 import { eventBus } from "../main";
-import UserService from "../services/UserService";
+import NoteService from "../services/NoteService";
 export default {
   name: "FundooDelete",
   data() {
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     fetchNotes: function () {
-      UserService.fetchNotesList().then((response) => {
+      NoteService.fetchNotesList().then((response) => {
         response.data.data.data.forEach((element) => {
           if (element.isDeleted == false && element.isArchived == false) {
             this.noteList.push(element);
@@ -30,7 +30,7 @@ export default {
         isDeleted: true,
         noteIdList: [this.cartId],
       };
-      UserService.moveToTrash(trashData).then(() => {
+      NoteService.moveToTrash(trashData).then(() => {
         this.fetchNotes();
         eventBus.$emit("getUpdatedNoteList", this.noteList);
       });

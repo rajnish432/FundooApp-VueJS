@@ -34,7 +34,7 @@
 <script>
 import FundooColorPalette from "./FundooColorPalette";
 import FundooArchive from "./FundooArchive";
-import UserService from "../services/UserService";
+import NoteService from "../services/NoteService";
 import FundooNotes from "./FundooNotes";
 import { eventBus } from "../main";
 
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     fetchNotes: function () {
-      UserService.fetchNotesList().then((response) => {
+      NoteService.fetchNotesList().then((response) => {
         response.data.data.data.forEach((element) => {
           if (element.isDeleted == false && element.isArchived == false) {
             this.noteList.push(element);
@@ -70,7 +70,7 @@ export default {
         title: this.title,
         description: this.description,
       };
-      UserService.addNote(note).then((response) => {
+      NoteService.addNote(note).then((response) => {
         this.responseData = response.data;
         this.title = "";
         this.description = "";
@@ -98,7 +98,7 @@ export default {
 }
 .create-note {
   width: 100%;
-  min-height: 684px;
+  min-height: 90vh;
 }
 
 .note {
