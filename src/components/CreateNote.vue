@@ -27,7 +27,6 @@
         </md-card>
       </div>
     </div>
-    <DisplayNotes />
   </div>
 </template>
 
@@ -35,7 +34,6 @@
 import ColorPaletteIcon from "./ColorPaletteIcon";
 import ArchiveIcon from "./ArchiveIcon";
 import NoteService from "../services/NoteService";
-import DisplayNotes from "./DisplayNotes";
 import { eventBus } from "../main";
 
 export default {
@@ -49,18 +47,8 @@ export default {
   components: {
     ColorPaletteIcon,
     ArchiveIcon,
-    DisplayNotes,
   },
   methods: {
-    fetchNotes: function () {
-      NoteService.fetchNotesList().then((response) => {
-        response.data.data.data.forEach((element) => {
-          if (element.isDeleted == false && element.isArchived == false) {
-            this.noteList.push(element);
-          }
-        });
-      });
-    },
     openNoteSpace: function () {
       document.getElementById("note-card").style.display = "flex";
       document.getElementById("header").style.display = "none";
@@ -77,9 +65,7 @@ export default {
       });
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
-      this.noteList=[]
-      this.fetchNotes();
-      eventBus.$emit("getUpdatedNoteList", this.noteList);
+      eventBus.$emit("getUpdatedNoteList");
     },
   },
   created() {
@@ -98,7 +84,6 @@ export default {
 }
 .create-note {
   width: 100%;
-  min-height: 90vh;
 }
 
 .note {

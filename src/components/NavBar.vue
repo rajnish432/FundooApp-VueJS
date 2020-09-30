@@ -62,20 +62,14 @@
           </md-list-item>
         </md-list>
       </md-drawer>
-      <div v-if="selected == 'Notes'" class="component">
-        <CreateNote />
-      </div>
-      <div v-if="selected == 'Trash'" class="component">
-        <Trash />
+      <div class="component">
+        <router-view></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CreateNote from "./CreateNote";
-import Trash from "./Trash";
-
 export default {
   name: "NavBar",
   data() {
@@ -84,15 +78,9 @@ export default {
       showNavigation: false,
       noteList: [],
       keepsrc: "keep.png",
-      selected: "Notes",
+      selected: "",
     };
   },
-
-  components: {
-    CreateNote,
-    Trash,
-  },
-
   methods: {
     showNavigationSlider: function () {
       if (this.showNavigation == false) {
@@ -110,7 +98,10 @@ export default {
       styleproperty.borderBottomRightRadius = "20px";
       this.selected = selectedOption;
       if (selectedOption == "Notes") {
-        this.$router.push("home");
+        this.$router.push("note");
+      }
+      if (selectedOption == "Trash") {
+        this.$router.push("trash");
       }
     },
   },
@@ -176,6 +167,7 @@ img {
 .component {
   width: 85%;
   display: flex;
+  height: 90vh;
   flex-direction: column;
 }
 </style>

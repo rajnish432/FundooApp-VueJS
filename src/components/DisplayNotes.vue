@@ -6,7 +6,11 @@
         ><br />
         <label class="description content">{{ note.description }}</label
         ><br />
-        <div class="notebox-icons">
+        <div v-if="iconCategory == 'trash'" class="notebox-icons">
+          <DeleteForeverIcon />
+          <RestoreTrashIcon />
+        </div>
+        <div v-else class="notebox-icons">
           <ColorPaletteIcon />
           <ArchiveIcon />
           <DeleteIcon />
@@ -16,17 +20,18 @@
   </div>
 </template>
 <script>
-import NoteService from "../services/NoteService";
 import ColorPaletteIcon from "./ColorPaletteIcon";
 import ArchiveIcon from "./ArchiveIcon";
 import DeleteIcon from "./DeleteIcon";
 import { eventBus } from "../main";
+import DeleteForeverIcon from "./DeleteForeverIcon";
+import RestoreTrashIcon from "./RestoreTrashIcon";
 
 export default {
   name: "DisplayNotes",
+  props: ["noteList", "iconCategory"],
   data() {
     return {
-      noteList: [],
       cardId: [],
     };
   },
@@ -34,29 +39,14 @@ export default {
     ColorPaletteIcon,
     ArchiveIcon,
     DeleteIcon,
+    DeleteForeverIcon,
+    RestoreTrashIcon,
   },
   methods: {
-    fetchNotes: function () {
-      NoteService.fetchNotesList().then((response) => {
-        response.data.data.data.forEach((element) => {
-          if (element.isDeleted == false && element.isArchived == false) {
-            this.noteList.push(element);
-          }
-        });
-      });
-    },
     getID: function (data) {
       this.cardId = data.id;
       eventBus.$emit("getNoteId", this.cardId);
     },
-  },
-  created() {
-    this.fetchNotes();
-    eventBus.$on("getUpdatedNoteList", (data) => {
-      if (!this.noteList.includes(data)) {
-        this.noteList = data;
-      }
-    });
   },
 };
 </script>
@@ -64,9 +54,9 @@ export default {
 .display-notes {
   display: flex;
   margin-top: 1%;
-  margin-left: 18%;
+  margin-left: 20%;
   flex-direction: row;
-  width: 60%;
+  width: 65%;
   flex-wrap: wrap;
 }
 

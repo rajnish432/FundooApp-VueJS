@@ -41,19 +41,19 @@ export default {
       password: "",
       result: "",
       hasEmailError: false,
-      hasPasswordError:false
+      hasPasswordError: false,
     };
   },
   methods: {
     login: function () {
       if (this.email == "" && this.password == "") {
-        return (this.hasEmailError = true),(this.hasPasswordError=true);
+        return (this.hasEmailError = true), (this.hasPasswordError = true);
       }
-      if(this.email==""){
-        return (this.hasEmailError = true),(this.hasPasswordError=false);
+      if (this.email == "") {
+        return (this.hasEmailError = true), (this.hasPasswordError = false);
       }
-      if(this.password==""){
-        return (this.hasEmailError = false),(this.hasPasswordError=true);
+      if (this.password == "") {
+        return (this.hasEmailError = false), (this.hasPasswordError = true);
       }
       const loginData = {
         cartID: this.cartID,
@@ -63,12 +63,12 @@ export default {
       userService.getUserLoggedIn(loginData).then((response) => {
         this.result = response.data;
         localStorage.setItem("token", response.data.id);
-        setTimeout(() => this.$router.push("home"), 3000);
+        setTimeout(() => this.$router.push("home/note"), 3000);
       }),
         (error) => {
           console.log(error.message);
         };
-      return (this.hasEmailError = false),(this.hasPasswordError=false);
+      return (this.hasEmailError = false), (this.hasPasswordError = false);
     },
   },
   computed: {

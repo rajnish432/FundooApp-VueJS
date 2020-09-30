@@ -1,33 +1,27 @@
 <template>
   <div class="trash-main flex-properties">
-    <div
-      class="trash-container flex-properties"
-      v-for="note in trashList"
-      v-bind:key="note"
-    >
-      <md-card>
-        <label class="content">{{ note.title }}</label
-        ><br />
-        <label class="description content">{{ note.description }}</label
-        ><br />
-        <div class="notebox-icons">
-          <md-icon @click.native="deletePermanently(note.id)">delete</md-icon>
-          <md-icon @click.native="restoreFromTrash(note.id)"
-            >restore_from_trash</md-icon
-          >
-        </div>
-      </md-card>
+    <div class="trash-container flex-properties">
+      <DisplayNotes
+        v-bind:noteList="trashList"
+        v-bind:iconCategory="iconCategory"
+      />
     </div>
   </div>
 </template>
 <script>
 import NoteService from "../services/NoteService";
+import DisplayNotes from "./DisplayNotes";
+import { eventBus } from "../main";
 export default {
   name: "Trash",
   data() {
     return {
       trashList: [],
+      iconCategory: "trash",
     };
+  },
+  components: {
+    DisplayNotes,
   },
   methods: {
     fetchTrashList: function () {
@@ -35,28 +29,18 @@ export default {
         this.trashList = response.data.data.data;
       });
     },
-    deletePermanently: function (noteId) {
-      const data = {
-        noteIdList: [noteId],
-      };
-      NoteService.deleteForever(data).then(() => {
-        this.trashList = [];
-        this.fetchTrashList();
-      });
-    },
-    restoreFromTrash: function (noteId) {
-      const noteData = {
-        isDeleted: false,
-        noteIdList: [noteId],
-      };
-      NoteService.restoreTrashNotes(noteData).then(() => {
-        this.trashList = [];
-        this.fetchTrashList();
-      });
-    },
   },
   created() {
     this.fetchTrashList();
+    eventBus.$on("getTrashList", () => {
+      this.trashList = [];
+      this.fetchTrashList();
+    });
+
+    eventBus.$on("restoreTrashList", () => {
+      this.trashList = [];
+      this.fetchTrashList();
+    });
   },
 };
 </script>
@@ -66,9 +50,8 @@ export default {
   flex-direction: row;
 }
 .trash-main {
-  margin-left: 20%;
-  width: 60%;
-  height: 684px;
+  width: 100%;
+  height: 90vh;
   justify-content: center;
   flex-wrap: wrap;
 }
