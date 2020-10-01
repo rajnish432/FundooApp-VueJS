@@ -8,11 +8,7 @@ import NoteService from "../services/NoteService";
 import { eventBus } from "../main";
 export default {
   name: "DeleteForeverIcon",
-  data() {
-    return {
-      noteId: "",
-    };
-  },
+  props:["noteId"],
   methods: {
     deletePermanently: function () {
       const data = {
@@ -22,11 +18,6 @@ export default {
         eventBus.$emit("getTrashList");
       });
     },
-  },
-  created() {
-    eventBus.$on("getNoteId", (data) => {
-      this.noteId = data;
-    });
   },
 };
 </script>

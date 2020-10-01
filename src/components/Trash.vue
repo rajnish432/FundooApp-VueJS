@@ -51,13 +51,14 @@ export default {
 }
 .trash-main {
   width: 100%;
-  height: 90vh;
+  height: 60vh;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .trash-container {
   margin-top: 20px;
+  width: 80%;
 }
 
 .md-card {

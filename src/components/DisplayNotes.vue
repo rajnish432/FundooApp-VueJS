@@ -1,31 +1,39 @@
 <template>
   <div class="display-notes">
     <div class="note-cards" v-for="note in noteList" v-bind:key="note.id">
-      <md-card @click.native="getID(note)">
-        <label class="content">{{ note.title }}</label
-        ><br />
-        <label class="description content">{{ note.description }}</label
-        ><br />
+      <md-card>
+        <div class="card-items" @click="updateBoxData(note)">
+          <label class="content">{{ note.title }}</label
+          ><br />
+          <label class="description content">{{ note.description }}</label
+          ><br />
+        </div>
         <div v-if="iconCategory == 'trash'" class="notebox-icons">
-          <DeleteForeverIcon />
-          <RestoreTrashIcon />
+          <DeleteForeverIcon v-bind:noteId="note.id" />
+          <RestoreTrashIcon v-bind:noteId="note.id" />
         </div>
         <div v-else class="notebox-icons">
           <ColorPaletteIcon />
           <ArchiveIcon />
-          <DeleteIcon />
+          <DeleteIcon v-bind:note="note.id" />
         </div>
       </md-card>
     </div>
+    <UpdateNote
+      v-if="showUpdateBox"
+      v-bind:showUpdateBox="showUpdateBox"
+      v-bind:notedata="notedata"
+    />
   </div>
 </template>
 <script>
 import ColorPaletteIcon from "./ColorPaletteIcon";
 import ArchiveIcon from "./ArchiveIcon";
 import DeleteIcon from "./DeleteIcon";
-import { eventBus } from "../main";
 import DeleteForeverIcon from "./DeleteForeverIcon";
 import RestoreTrashIcon from "./RestoreTrashIcon";
+import UpdateNote from "./UpdateNote";
+import { eventBus } from "../main";
 
 export default {
   name: "DisplayNotes",
@@ -33,6 +41,8 @@ export default {
   data() {
     return {
       cardId: [],
+      showUpdateBox: false,
+      notedata: {},
     };
   },
   components: {
@@ -41,12 +51,18 @@ export default {
     DeleteIcon,
     DeleteForeverIcon,
     RestoreTrashIcon,
+    UpdateNote,
   },
   methods: {
-    getID: function (data) {
-      this.cardId = data.id;
-      eventBus.$emit("getNoteId", this.cardId);
+    updateBoxData: function (note) {
+      this.showUpdateBox = true;
+      this.notedata = note;
     },
+  },
+  created() {
+    eventBus.$on("closeDialogBox", (data) => {
+      this.showUpdateBox = data;
+    });
   },
 };
 </script>
@@ -60,19 +76,24 @@ export default {
   flex-wrap: wrap;
 }
 
-.md-card {
-  margin: 8px;
+.card-items {
   display: flex;
   flex-direction: column;
-  border-radius: 5%;
+
   height: min-content;
+
+  text-align: start;
+  padding: 10px;
+}
+
+.md-card {
+  margin: 8px;
+  padding: 18px;
   width: 190px;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  text-align: start;
-  padding: 18px;
+  border-radius: 5%;
 }
-
 .content {
   font-weight: bold;
   font-size: 18px;

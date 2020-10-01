@@ -8,11 +8,7 @@ import NoteService from "../services/NoteService";
 import { eventBus } from "../main";
 export default {
   name: "RestoreTrashIcon",
-  data() {
-    return {
-      noteId: "",
-    };
-  },
+  props:["noteId"],
   methods: {
     restoreFromTrash: function () {
       const noteData = {
@@ -23,11 +19,6 @@ export default {
         eventBus.$emit("restoreTrashList");
       });
     },
-  },
-  created() {
-    eventBus.$on("getNoteId", (data) => {
-      this.noteId = data;
-    });
   },
 };
 </script>>

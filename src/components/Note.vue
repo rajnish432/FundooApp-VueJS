@@ -41,6 +41,7 @@ export default {
       this.noteList = [];
       this.fetchNotes();
     });
+    eventBus.$emit("sendIdList",this.noteList.id)
   },
 };
 </script>
