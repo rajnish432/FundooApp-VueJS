@@ -22,7 +22,7 @@
     <UpdateNote
       v-if="showUpdateBox"
       v-bind:showUpdateBox="showUpdateBox"
-      v-bind:notedata="notedata"
+      v-bind:noteData="noteData"
     />
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
     return {
       cardId: [],
       showUpdateBox: false,
-      notedata: {},
+      noteData: {},
     };
   },
   components: {
@@ -56,7 +56,7 @@ export default {
   methods: {
     updateBoxData: function (note) {
       this.showUpdateBox = true;
-      this.notedata = note;
+      this.noteData = note;
     },
   },
   created() {

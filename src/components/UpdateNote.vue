@@ -24,25 +24,36 @@
 import ColorPaletteIcon from "./ColorPaletteIcon";
 import ArchiveIcon from "./ArchiveIcon";
 import { eventBus } from "../main";
+import NoteService from "../services/NoteService";
 export default {
   name: "UpdateNote",
-  props: ["showUpdateBox", "notedata"],
+  props: ["showUpdateBox", "noteData"],
   data() {
     return {
       title: "",
       description: "",
+      noteId: "",
     };
   },
   methods: {
     closeDialogBox: function () {
-      this.showUpdateBox = false;
-      eventBus.$emit("closeDialogBox", this.showUpdateBox);
+      const updateData = {
+        noteId: this.noteId,
+        title: this.title,
+        description: this.description,
+      };
+      NoteService.updateNotes(updateData).then(() => {
+        this.showUpdateBox = false;
+        eventBus.$emit("closeDialogBox", this.showUpdateBox);
+        eventBus.$emit("getUpdatedNoteList");
+      });
     },
   },
 
   mounted() {
-    this.title = this.$props.notedata.title;
-    this.description = this.$props.notedata.description;
+    this.noteId = this.$props.noteData.id;
+    this.title = this.$props.noteData.title;
+    this.description = this.$props.noteData.description;
   },
 
   components: {

@@ -24,6 +24,10 @@ class NoteService{
     restoreTrashNotes(noteData){
         return httpservice.post('notes/trashNotes',noteData)
     }
+
+    updateNotes(updateData){
+        return httpservice.post('notes/updateNotes',updateData)
+    }
 }
 
 export default new NoteService
