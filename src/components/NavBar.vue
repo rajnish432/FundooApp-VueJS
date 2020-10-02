@@ -4,7 +4,10 @@
       <md-toolbar class="md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <md-button class="md-icon-button" @click="showNavigationSlider()">
+            <md-button
+              class="md-icon-button menubtn"
+              @click="showNavigationSlider()"
+            >
               <md-icon>menu</md-icon>
             </md-button>
             <span class="md-title">
@@ -21,14 +24,25 @@
           </md-autocomplete>
 
           <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button">
-              <md-icon>person</md-icon>
-            </md-button>
+            <md-menu md-size="medium" md-align-trigger>
+              <md-button class="md-icon-button" md-menu-trigger>
+                <md-icon>person</md-icon>
+              </md-button>
+              <md-menu-content>
+                <div class="profile">
+                  <label class="profile-content name">{{ firstName }}</label
+                  ><br />
+                  <label class="profile-content">{{ email }}</label
+                  ><br />
+                  <md-button id="signout" @click="signout">Sign-out</md-button>
+                </div>
+              </md-menu-content>
+            </md-menu>
           </div>
         </div>
       </md-toolbar>
     </div>
-    <div class="navbar">
+    <div class="navbar-items">
       <md-drawer
         :md-active.sync="showNavigation"
         md-swipeable
@@ -79,6 +93,8 @@ export default {
       noteList: [],
       keepsrc: "keep.png",
       selected: "",
+      firstName: "",
+      email: "",
     };
   },
   methods: {
@@ -104,6 +120,16 @@ export default {
         this.$router.push("trash");
       }
     },
+    signout: function () {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      this.$router.push("/");
+    },
+  },
+  created() {
+    this.firstName = localStorage.getItem("username");
+    this.email = localStorage.getItem("email");
   },
 };
 </script>
@@ -146,13 +172,9 @@ export default {
 }
 
 .md-toolbar .md-autocomplete.md-theme-default.md-autocomplete-box {
-  height: 50px;
+  height: 44px;
   border-radius: 7px;
-}
-
-.md-drawer.md-theme-default.md-persistent-mini.md-left {
-  width: 15%;
-  min-height: 90vh;
+  padding-right: inherit;
 }
 
 .md-title {
@@ -161,13 +183,64 @@ export default {
 }
 
 img {
-  width: 12%;
+  width: 10%;
 }
 
 .component {
   width: 85%;
   display: flex;
-  height: 90vh;
+  min-height: initial;
   flex-direction: column;
+}
+
+.navbar-items {
+  display: flex;
+  min-height: 91vh;
+}
+
+.md-field .md-input,
+.md-field .md-textarea {
+  width: 100% !important;
+}
+
+.md-menu-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  min-height: 30vh;
+}
+
+.md-icon-button {
+  border: 1px solid grey;
+  background-color: rgb(143, 143, 255);
+}
+
+.menubtn {
+  background-color: transparent;
+  border: none;
+}
+
+.profile {
+  width: 100%;
+  padding-top: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-content {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+}
+
+.name {
+  text-transform: capitalize;
+}
+
+#signout {
+  background-color: rgb(143, 143, 255);
+  width: 40%;
 }
 </style>

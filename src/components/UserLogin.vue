@@ -63,6 +63,8 @@ export default {
       userService.getUserLoggedIn(loginData).then((response) => {
         this.result = response.data;
         localStorage.setItem("token", response.data.id);
+        localStorage.setItem("username",response.data.firstName);
+        localStorage.setItem("email",response.data.email);
         setTimeout(() => this.$router.push("home/note"), 3000);
       }),
         (error) => {

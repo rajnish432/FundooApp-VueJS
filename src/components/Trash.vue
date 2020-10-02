@@ -31,6 +31,10 @@ export default {
     },
   },
   created() {
+    if (localStorage.getItem("token") == undefined) {
+      this.$router.push("/");
+    }
+    
     this.fetchTrashList();
     eventBus.$on("getTrashList", () => {
       this.trashList = [];
@@ -51,7 +55,7 @@ export default {
 }
 .trash-main {
   width: 100%;
-  height: 60vh;
+  min-height: fit-content;
   justify-content: center;
   flex-wrap: wrap;
 }
