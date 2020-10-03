@@ -79,9 +79,7 @@ export default {
 .card-items {
   display: flex;
   flex-direction: column;
-
   height: min-content;
-
   text-align: start;
   padding: 10px;
 }

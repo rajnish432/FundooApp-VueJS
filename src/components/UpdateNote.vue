@@ -65,7 +65,7 @@ export default {
 <style scoped>
 .md-dialog /deep/.md-dialog-container {
   width: 40%;
-  min-height: 20vh;
+  height: fit-content;
   border-radius: 7px;
 }
 
@@ -93,7 +93,6 @@ export default {
 
 .md-field {
   font-weight: 600;
-  margin: 0%;
   font-size: 16px;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
 }

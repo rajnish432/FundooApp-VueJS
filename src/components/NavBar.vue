@@ -11,7 +11,7 @@
               <md-icon>menu</md-icon>
             </md-button>
             <span class="md-title">
-              <img v-bind:src="require('../assets/' + keepsrc)" /> Fundoo
+              <img v-bind:src="require('../assets/' + keepsrc)" /> <span id="title"> Fundoo </span>
             </span>
           </div>
           <md-autocomplete
@@ -208,7 +208,7 @@ img {
   flex-direction: column;
   justify-content: center;
   width: 20%;
-  min-height: 30vh;
+  min-height: fit-content;
 }
 
 .md-icon-button {
@@ -242,5 +242,37 @@ img {
 #signout {
   background-color: rgb(143, 143, 255);
   width: 40%;
+}
+
+.md-drawer{
+  width: 17%;
+}
+@media screen and (max-width: 1025px){
+  .navbar-items{
+    min-height: 95vh;
+  }
+
+  .md-menu-content{
+  width:80%;
+  left: 88px;
+}
+}
+
+@media screen and (max-width: 480px) {
+  #title{
+  display: none;
+}
+
+img {
+  width: 100%;
+}
+
+.component{
+  margin-left: 10px;
+}
+
+.md-drawer{
+  width: 20%;
+}
 }
 </style>
