@@ -36,6 +36,10 @@ class NoteService{
     fetchArchiveNotes(){
         return httpservice.get('notes/getArchiveNotesList')
     }
+
+    unarchiveNotes(noteData){
+        return httpservice.post('notes/archiveNotes',noteData)
+    }
 }
 
 export default new NoteService

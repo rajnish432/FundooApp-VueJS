@@ -13,7 +13,7 @@
           <RestoreTrashIcon v-bind:noteId="note.id" />
         </div>
         <div v-else-if="iconCategory == 'archive'" class="notebox-icons">
-          <UnarchiveIcon />
+          <UnarchiveIcon v-bind:noteId="note.id"/>
         </div>
         <div v-else class="notebox-icons">
           <ColorPaletteIcon />

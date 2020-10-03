@@ -9,6 +9,7 @@
 <script>
 import DisplayNotes from "./DisplayNotes";
 import NoteService from "../services/NoteService";
+import {eventBus} from '../main'
 export default {
   name: "Archive",
   data() {
@@ -32,6 +33,10 @@ export default {
       this.$router.push("/");
     }
     this.fetchArchiveList();
+    eventBus.$on("unarchivedNote", () => {
+      this.archiveList = [];
+      this.fetchArchiveList();
+    });
   },
 };
 </script>
@@ -39,9 +44,8 @@ export default {
 .display-notes {
   display: flex;
   margin-top: 1%;
-  margin-left: 20%;
   flex-direction: row;
-  width: 65%;
+  width: 80%;
   flex-wrap: wrap;
 }
 </style>
