@@ -12,9 +12,12 @@
           <DeleteForeverIcon v-bind:noteId="note.id" />
           <RestoreTrashIcon v-bind:noteId="note.id" />
         </div>
+        <div v-else-if="iconCategory == 'archive'" class="notebox-icons">
+          <UnarchiveIcon />
+        </div>
         <div v-else class="notebox-icons">
           <ColorPaletteIcon />
-          <ArchiveIcon />
+          <ArchiveIcon v-bind:note="note.id" />
           <DeleteIcon v-bind:note="note.id" />
         </div>
       </md-card>
@@ -33,6 +36,7 @@ import DeleteIcon from "./DeleteIcon";
 import DeleteForeverIcon from "./DeleteForeverIcon";
 import RestoreTrashIcon from "./RestoreTrashIcon";
 import UpdateNote from "./UpdateNote";
+import UnarchiveIcon from './UnarchiveIcon';
 import { eventBus } from "../main";
 
 export default {
@@ -52,6 +56,7 @@ export default {
     DeleteForeverIcon,
     RestoreTrashIcon,
     UpdateNote,
+    UnarchiveIcon
   },
   methods: {
     updateBoxData: function (note) {

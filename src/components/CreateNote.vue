@@ -151,4 +151,12 @@ span {
 #header {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 480px) {
+  .note {
+    min-width: 78%;
+    padding: 20px;
+    margin-left: 22%;
+  }
+}
 </style>

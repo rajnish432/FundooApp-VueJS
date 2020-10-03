@@ -28,6 +28,14 @@ class NoteService{
     updateNotes(updateData){
         return httpservice.post('notes/updateNotes',updateData)
     }
+
+    archiveNotes(archiveData){
+        return httpservice.post('notes/archiveNotes',archiveData)
+    }
+
+    fetchArchiveNotes(){
+        return httpservice.get('notes/getArchiveNotesList')
+    }
 }
 
 export default new NoteService
