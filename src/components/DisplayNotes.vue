@@ -1,7 +1,7 @@
 <template>
   <div class="display-notes">
     <div class="note-cards" v-for="note in noteList" v-bind:key="note.id">
-      <md-card>
+      <md-card v-bind:style="{ background: note.color }">
         <div class="card-items" @click="updateBoxData(note)">
           <label class="content">{{ note.title }}</label
           ><br />
@@ -13,10 +13,10 @@
           <RestoreTrashIcon v-bind:noteId="note.id" />
         </div>
         <div v-else-if="iconCategory == 'archive'" class="notebox-icons">
-          <UnarchiveIcon v-bind:noteId="note.id"/>
+          <UnarchiveIcon v-bind:noteId="note.id" />
         </div>
         <div v-else class="notebox-icons">
-          <ColorPaletteIcon />
+          <ColorPaletteIcon v-bind:note="note.id" />
           <ArchiveIcon v-bind:note="note.id" />
           <DeleteIcon v-bind:note="note.id" />
         </div>
@@ -36,7 +36,7 @@ import DeleteIcon from "./DeleteIcon";
 import DeleteForeverIcon from "./DeleteForeverIcon";
 import RestoreTrashIcon from "./RestoreTrashIcon";
 import UpdateNote from "./UpdateNote";
-import UnarchiveIcon from './UnarchiveIcon';
+import UnarchiveIcon from "./UnarchiveIcon";
 import { eventBus } from "../main";
 
 export default {
@@ -56,7 +56,7 @@ export default {
     DeleteForeverIcon,
     RestoreTrashIcon,
     UpdateNote,
-    UnarchiveIcon
+    UnarchiveIcon,
   },
   methods: {
     updateBoxData: function (note) {

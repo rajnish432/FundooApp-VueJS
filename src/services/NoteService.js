@@ -40,6 +40,10 @@ class NoteService{
     unarchiveNotes(noteData){
         return httpservice.post('notes/archiveNotes',noteData)
     }
+
+    changeCardColor(colorData){
+        return httpservice.post('notes/changesColorNotes',colorData)
+    }
 }
 
 export default new NoteService

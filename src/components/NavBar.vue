@@ -11,7 +11,8 @@
               <md-icon>menu</md-icon>
             </md-button>
             <span class="md-title">
-              <img v-bind:src="require('../assets/' + keepsrc)" /> <span id="title"> Fundoo </span>
+              <img v-bind:src="require('../assets/' + keepsrc)" />
+              <span id="title"> Fundoo </span>
             </span>
           </div>
           <md-autocomplete
@@ -26,10 +27,13 @@
           <div class="md-toolbar-section-end">
             <md-menu md-size="medium" md-align-trigger>
               <md-button class="md-icon-button" md-menu-trigger>
-                <md-icon>person</md-icon>
+                {{ firstName.substr(0, 1) }}
               </md-button>
               <md-menu-content>
                 <div class="profile">
+                  <md-button class="md-icon-button" >
+                    {{ firstName.substr(0, 1) }}
+                  </md-button><br>
                   <label class="profile-content name">{{ firstName }}</label
                   ><br />
                   <label class="profile-content">{{ email }}</label
@@ -119,7 +123,7 @@ export default {
       if (selectedOption == "Trash") {
         this.$router.push("trash");
       }
-      if(selectedOption=="Archive"){
+      if (selectedOption == "Archive") {
         this.$router.push("archive");
       }
     },
@@ -247,35 +251,35 @@ img {
   width: 40%;
 }
 
-.md-drawer{
+.md-drawer {
   width: 17%;
 }
-@media screen and (max-width: 1025px){
-  .navbar-items{
+@media screen and (max-width: 1025px) {
+  .navbar-items {
     min-height: 95vh;
   }
 
-  .md-menu-content{
-  width:80%;
-  left: 88px;
-}
+  .md-menu-content {
+    width: 80%;
+    left: 88px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-  #title{
-  display: none;
-}
+  #title {
+    display: none;
+  }
 
-img {
-  width: 100%;
-}
+  img {
+    width: 100%;
+  }
 
-.component{
-  margin-left: 10px;
-}
+  .component {
+    margin-left: 10px;
+  }
 
-.md-drawer{
-  width: 20%;
-}
+  .md-drawer {
+    width: 20%;
+  }
 }
 </style>
