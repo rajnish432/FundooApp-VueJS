@@ -25,15 +25,20 @@
           </md-autocomplete>
 
           <div class="md-toolbar-section-end">
+            <span>
+              <md-button @click="list" class="md-icon-button menubtn list-view">
+                <md-icon>view_list</md-icon>
+              </md-button>
+            </span>
             <md-menu md-size="medium" md-align-trigger>
               <md-button class="md-icon-button" md-menu-trigger>
                 {{ firstName.substr(0, 1) }}
               </md-button>
               <md-menu-content>
                 <div class="profile">
-                  <md-button class="md-icon-button" >
-                    {{ firstName.substr(0, 1) }}
-                  </md-button><br>
+                  <md-button class="md-icon-button">
+                    {{ firstName.substr(0, 1) }} </md-button
+                  ><br />
                   <label class="profile-content name">{{ firstName }}</label
                   ><br />
                   <label class="profile-content">{{ email }}</label
@@ -88,6 +93,7 @@
 </template>
 
 <script>
+import { eventBus } from '../main';
 export default {
   name: "NavBar",
   data() {
@@ -99,6 +105,7 @@ export default {
       selected: "",
       firstName: "",
       email: "",
+      listView: false,
     };
   },
   methods: {
@@ -133,6 +140,14 @@ export default {
       localStorage.removeItem("email");
       this.$router.push("/");
     },
+    list: function () {
+      if (this.listView == false) {
+        this.listView = true;
+      } else {
+        this.listView = false;
+      }
+      eventBus.$emit("listView",this.listView);
+    },
   },
   created() {
     this.firstName = localStorage.getItem("username");
@@ -152,6 +167,11 @@ export default {
   flex-direction: row;
   width: 100%;
   align-items: center;
+}
+
+.list-view {
+  margin-right: 50% !important;
+  width: auto;
 }
 
 .md-list-item:hover {
@@ -199,6 +219,10 @@ img {
   min-height: initial;
   flex-direction: column;
 }
+
+/* .md-toolbar-section-end {
+  justify-content: space-between;
+} */
 
 .navbar-items {
   display: flex;
@@ -253,6 +277,10 @@ img {
 
 .md-drawer {
   width: 17%;
+}
+
+.list-view {
+  margin-left: 10%;
 }
 @media screen and (max-width: 1025px) {
   .navbar-items {

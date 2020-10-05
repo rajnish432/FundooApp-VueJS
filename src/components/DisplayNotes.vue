@@ -1,7 +1,7 @@
 <template>
   <div class="display-notes">
     <div class="note-cards" v-for="note in noteList" v-bind:key="note.id">
-      <md-card v-bind:style="{ background: note.color }">
+      <md-card class="cards" v-bind:style="{ background: note.color }">
         <div class="card-items" @click="updateBoxData(note)">
           <label class="content">{{ note.title }}</label
           ><br />
@@ -68,6 +68,31 @@ export default {
     eventBus.$on("closeDialogBox", (data) => {
       this.showUpdateBox = data;
     });
+
+    eventBus.$on("listView", (data) => {
+      if (data == true) {
+        document.getElementsByClassName(
+          "display-notes"
+        )[0].style.flexDirection = "column";
+        var styleProperty=document.getElementsByClassName(
+          "cards"
+        )
+        for( var i=0;i<styleProperty.length;i++){
+          styleProperty[i].style["width"]="90%"
+        }
+      }
+      if (data == false) {
+        document.getElementsByClassName(
+          "display-notes"
+        )[0].style.flexDirection = "row";
+        var styleProp=document.getElementsByClassName(
+          "cards"
+        )
+        for( var j=0;j<styleProp.length;j++){
+          styleProp[j].style["width"]="190px"
+        }
+      }
+    });
   },
 };
 </script>
@@ -89,7 +114,7 @@ export default {
   padding: 10px;
 }
 
-.md-card {
+.cards {
   margin: 8px;
   padding: 18px;
   width: 190px;
