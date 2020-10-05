@@ -102,7 +102,7 @@ export default {
   margin-top: 1%;
   margin-left: 20%;
   flex-direction: row;
-  width: 65%;
+  width: 70%;
   flex-wrap: wrap;
 }
 
@@ -141,4 +141,5 @@ export default {
   flex-direction: row;
   justify-content: space-evenly;
 }
+
 </style>

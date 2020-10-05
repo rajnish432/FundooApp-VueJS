@@ -5,7 +5,7 @@
         <md-card id="header"> Take a note...</md-card>
       </div>
       <div id="notebox">
-        <md-card id="note-card">
+        <md-card id="note-card" v-bind:style="{ background: cardColor }" >
           <md-field md-inline>
             <label>Title</label>
             <md-input v-model="title"></md-input> </md-field
@@ -19,7 +19,7 @@
           ><br />
           <div class="notebox-icons">
             <span>
-              <ColorPaletteIcon />
+              <ColorPaletteIcon v-bind:createNote="createNote" />
               <ArchiveIcon />
             </span>
             <button @click="closeNoteSpace()">Close</button>
@@ -42,6 +42,8 @@ export default {
       title: "",
       description: "",
       noteList: [],
+      cardColor:'',
+      createNote:true,
     };
   },
   components: {
@@ -57,11 +59,13 @@ export default {
       const note = {
         title: this.title,
         description: this.description,
+        color:this.cardColor,
       };
       NoteService.addNote(note).then((response) => {
         this.responseData = response.data;
         this.title = "";
         this.description = "";
+        this.cardColor='#FFFFFF';
       });
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
@@ -72,6 +76,9 @@ export default {
     if (localStorage.getItem("token") == undefined) {
       this.$router.push("/");
     }
+    eventBus.$on("getColorUpdated",(data)=>{
+      this.cardColor=data;
+    })
   },
 };
 </script>

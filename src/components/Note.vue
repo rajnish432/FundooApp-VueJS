@@ -51,7 +51,7 @@ export default {
 </script>
 <style scoped>
 .md-progress-spinner{
-  margin: 10px;
+  margin-top: 15% ;
 }
 
 .visibility{

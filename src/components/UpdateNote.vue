@@ -95,6 +95,7 @@ export default {
   font-weight: 600;
   font-size: 16px;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
+  margin: unset;
 }
 
 .md-field:after,
