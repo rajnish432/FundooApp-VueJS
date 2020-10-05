@@ -37,7 +37,7 @@
               <md-menu-content>
                 <div class="profile">
                   <md-button class="md-icon-button">
-                    {{ firstName.substr(0, 1) }} </md-button
+                    <label id="initials-name">{{ firstName.substr(0, 1) }}</label> </md-button
                   ><br />
                   <label class="profile-content name">{{ firstName }}</label
                   ><br />
@@ -169,6 +169,10 @@ export default {
   align-items: center;
 }
 
+#initials-name{
+  color: white;
+}
+
 .list-view {
   margin-right: 50% !important;
   width: auto;
@@ -220,10 +224,6 @@ img {
   flex-direction: column;
 }
 
-/* .md-toolbar-section-end {
-  justify-content: space-between;
-} */
-
 .navbar-items {
   display: flex;
   min-height: 91vh;
@@ -273,6 +273,8 @@ img {
 #signout {
   background-color: rgb(143, 143, 255);
   width: 40%;
+  color:white;
+  border-radius: 7px;
 }
 
 .md-drawer {

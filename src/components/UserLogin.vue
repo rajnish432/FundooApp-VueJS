@@ -24,8 +24,9 @@
       </div>
       <md-button class="md-raised md-primary" @click="login">Log In</md-button>
     </div>
-
-    <router-view></router-view>
+    <md-snackbar md-position="left" :md-duration="isInfinity ? Infinity : duration" :md-active.sync="showSnackbar" md-persistent>
+      <span>{{result}}</span>
+    </md-snackbar>
   </div>
 </template>
 
@@ -42,6 +43,7 @@ export default {
       result: "",
       hasEmailError: false,
       hasPasswordError: false,
+      showSnackbar:false
     };
   },
   methods: {
@@ -61,7 +63,8 @@ export default {
         password: this.password,
       };
       userService.getUserLoggedIn(loginData).then((response) => {
-        this.result = response.data;
+        this.showSnackbar=true
+        this.result = "Login Successful";
         localStorage.setItem("token", response.data.id);
         localStorage.setItem("username",response.data.firstName);
         localStorage.setItem("email",response.data.email);
