@@ -142,4 +142,9 @@ export default {
   justify-content: space-evenly;
 }
 
+@media screen and (max-width: 420px){
+  .display-notes{
+    width: 80%;
+  }
+}
 </style>
