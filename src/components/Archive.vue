@@ -1,7 +1,7 @@
 <template>
   <div class="display-notes">
     <DisplayNotes
-      v-bind:noteList="archiveList"
+      v-bind:noteList="filteredList"
       v-bind:iconCategory="iconCategory"
     />
   </div>
@@ -16,6 +16,7 @@ export default {
     return {
       archiveList: [],
       iconCategory: "archive",
+      searchText:'',
     };
   },
   components: {
@@ -37,7 +38,18 @@ export default {
       this.archiveList = [];
       this.fetchArchiveList();
     });
+
+    eventBus.$on("searchCard", (data) => {
+      this.searchText=data;
+    });
   },
+  computed:{
+    filteredList:function(){
+      return this.archiveList.filter((note)=>{
+        return note.title.match(this.searchText);
+      })
+    }
+  }
 };
 </script>
 <style scoped>
@@ -45,7 +57,7 @@ export default {
   display: flex;
   margin-top: 1%;
   flex-direction: row;
-  width: 80%;
+  width: auto;
   flex-wrap: wrap;
 }
 </style>

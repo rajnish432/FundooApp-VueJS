@@ -2,7 +2,7 @@
   <div class="trash-main flex-properties">
     <div class="trash-container flex-properties">
       <DisplayNotes
-        v-bind:noteList="trashList"
+        v-bind:noteList="filteredList"
         v-bind:iconCategory="iconCategory"
       />
     </div>
@@ -18,6 +18,7 @@ export default {
     return {
       trashList: [],
       iconCategory: "trash",
+      searchText:'',
     };
   },
   components: {
@@ -45,7 +46,18 @@ export default {
       this.trashList = [];
       this.fetchTrashList();
     });
+
+    eventBus.$on("searchCard", (data) => {
+      this.searchText=data;
+    });
   },
+  computed:{
+    filteredList:function(){
+      return this.trashList.filter((note)=>{
+        return note.title.match(this.searchText);
+      })
+    }
+  }
 };
 </script>
 <style scoped>

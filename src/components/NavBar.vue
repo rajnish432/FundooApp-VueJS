@@ -17,8 +17,8 @@
           </div>
           <md-autocomplete
             class="search"
-            v-model="searchResult"
-            :md-options="noteList"
+            v-model="searchText"
+            :md-options="options"
             md-layout="box"
           >
             <label>Search...</label>
@@ -37,7 +37,9 @@
               <md-menu-content>
                 <div class="profile">
                   <md-button class="md-icon-button">
-                    <label id="initials-name">{{ firstName.substr(0, 1) }}</label> </md-button
+                    <label id="initials-name">{{
+                      firstName.substr(0, 1)
+                    }}</label> </md-button
                   ><br />
                   <label class="profile-content name">{{ firstName }}</label
                   ><br />
@@ -93,14 +95,14 @@
 </template>
 
 <script>
-import { eventBus } from '../main';
+import { eventBus } from "../main";
 export default {
   name: "NavBar",
   data() {
     return {
-      searchResult: null,
+      searchText: "",
+      options: [],
       showNavigation: false,
-      noteList: [],
       keepsrc: "keep.png",
       selected: "",
       firstName: "",
@@ -146,7 +148,12 @@ export default {
       } else {
         this.listView = false;
       }
-      eventBus.$emit("listView",this.listView);
+      eventBus.$emit("listView", this.listView);
+    },
+  },
+  watch: {
+    searchText: function () {
+      eventBus.$emit("searchCard", this.searchText);
     },
   },
   created() {
@@ -169,7 +176,7 @@ export default {
   align-items: center;
 }
 
-#initials-name{
+#initials-name {
   color: white;
 }
 
@@ -273,7 +280,7 @@ img {
 #signout {
   background-color: rgb(143, 143, 255);
   width: 40%;
-  color:white;
+  color: white;
   border-radius: 7px;
 }
 

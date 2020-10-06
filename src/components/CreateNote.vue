@@ -5,7 +5,7 @@
         <md-card id="header"> Take a note...</md-card>
       </div>
       <div id="notebox">
-        <md-card id="note-card" v-bind:style="{ background: cardColor }" >
+        <md-card id="note-card" v-bind:style="{ background: cardColor }">
           <md-field md-inline>
             <label>Title</label>
             <md-input v-model="title"></md-input> </md-field
@@ -42,9 +42,9 @@ export default {
       title: "",
       description: "",
       noteList: [],
-      cardColor:'',
-      createNote:true,
-      isArchived:false,
+      cardColor: "",
+      createNote: true,
+      isArchived: false,
     };
   },
   components: {
@@ -60,18 +60,18 @@ export default {
       const note = {
         title: this.title,
         description: this.description,
-        color:this.cardColor,
-        isArchived:this.isArchived,
+        color: this.cardColor,
+        isArchived: this.isArchived,
       };
       NoteService.addNote(note).then((response) => {
         this.responseData = response.data;
         this.title = "";
         this.description = "";
-        this.cardColor='#FFFFFF';
-        this.isArchived=false;
       });
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
+      this.cardColor = "#FFFFFF";
+      this.isArchived = false;
       eventBus.$emit("getUpdatedNoteList");
     },
   },
@@ -79,12 +79,12 @@ export default {
     if (localStorage.getItem("token") == undefined) {
       this.$router.push("/");
     }
-    eventBus.$on("getColorUpdated",(data)=>{
-      this.cardColor=data;
-    })
-    eventBus.$on("isArchived",(data)=>{
-      this.isArchived=data;
-    })
+    eventBus.$on("getColorUpdated", (data) => {
+      this.cardColor = data;
+    });
+    eventBus.$on("isArchived", (data) => {
+      this.isArchived = data;
+    });
   },
 };
 </script>
