@@ -12,7 +12,7 @@
         <div class="notebox-icons">
           <span>
             <ColorPaletteIcon />
-            <ArchiveIcon />
+            <ArchiveIcon v-bind:note="noteId" />
           </span>
           <button @click="closeDialogBox">Close</button>
         </div>
@@ -44,6 +44,7 @@ export default {
       };
       NoteService.updateNotes(updateData).then(() => {
         this.showUpdateBox = false;
+        this.isArchived=false;
         eventBus.$emit("closeDialogBox", this.showUpdateBox);
         eventBus.$emit("getUpdatedNoteList");
       });

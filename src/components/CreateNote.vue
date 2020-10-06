@@ -44,6 +44,7 @@ export default {
       noteList: [],
       cardColor:'',
       createNote:true,
+      isArchived:false,
     };
   },
   components: {
@@ -60,12 +61,14 @@ export default {
         title: this.title,
         description: this.description,
         color:this.cardColor,
+        isArchived:this.isArchived,
       };
       NoteService.addNote(note).then((response) => {
         this.responseData = response.data;
         this.title = "";
         this.description = "";
         this.cardColor='#FFFFFF';
+        this.isArchived=false;
       });
       document.getElementById("note-card").style.display = "none";
       document.getElementById("header").style.display = "flex";
@@ -78,6 +81,9 @@ export default {
     }
     eventBus.$on("getColorUpdated",(data)=>{
       this.cardColor=data;
+    })
+    eventBus.$on("isArchived",(data)=>{
+      this.isArchived=data;
     })
   },
 };

@@ -10,6 +10,11 @@ import { eventBus } from "../main";
 export default {
   name: "ArchiveIcon",
   props:["note"],
+  data(){
+    return{
+      archive:true,
+    }
+  },
   methods:{
     sendToArchive:function(){
       const archiveData={
@@ -19,6 +24,7 @@ export default {
       NoteService.archiveNotes(archiveData).then(()=>{
         eventBus.$emit("getUpdatedNoteList");
       })
+      eventBus.$emit("isArchived",this.archive)
     }
   }
 };
