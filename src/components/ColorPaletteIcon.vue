@@ -69,6 +69,7 @@ export default {
   flex-wrap: wrap;
   width: 12%;
   min-height: fit-content;
+  position: absolute;
 }
 
 .color-items {

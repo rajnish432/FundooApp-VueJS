@@ -146,5 +146,9 @@ export default {
   .display-notes{
     width: 80%;
   }
+
+  .cards{
+    width: auto;
+  }
 }
 </style>

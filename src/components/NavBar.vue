@@ -25,7 +25,7 @@
           </md-autocomplete>
 
           <div class="md-toolbar-section-end">
-            <span>
+            <span class="listview">
               <md-button @click="list" class="md-icon-button menubtn list-view">
                 <md-icon>view_list</md-icon>
               </md-button>
@@ -317,6 +317,19 @@ img {
 
   .md-drawer {
     width: 20%;
+  }
+
+  .listview{
+    display: none;
+  }
+
+  .search{
+    max-width: 52%;
+    margin-left: 2% !important;
+  }
+
+  .md-title{
+    width: 50px;
   }
 }
 </style>
