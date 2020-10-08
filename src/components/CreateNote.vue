@@ -27,6 +27,14 @@
         </md-card>
       </div>
     </div>
+    <md-snackbar
+      md-position="left"
+      :md-duration="isInfinity ? Infinity : duration"
+      :md-active.sync="showSnackbar"
+      md-persistent
+    >
+      <span>{{ result }}</span>
+    </md-snackbar>
   </div>
 </template>
 
@@ -45,6 +53,7 @@ export default {
       cardColor: "",
       createNote: true,
       isArchived: false,
+      showSnackbar: false,
     };
   },
   components: {
@@ -64,6 +73,8 @@ export default {
         isArchived: this.isArchived,
       };
       NoteService.addNote(note).then((response) => {
+        this.showSnackbar = true;
+        this.result = "Note Added Successfully";
         this.responseData = response.data;
         this.title = "";
         this.description = "";

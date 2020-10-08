@@ -40,7 +40,7 @@
 <script>
 import Datepicker from "vuejs-datetimepicker";
 import NoteService from "../services/NoteService";
-import {eventBus} from "../main";
+import { eventBus } from "../main";
 export default {
   name: "ReminderIcon",
   data() {
