@@ -11,7 +11,7 @@
         <div v-if="note.reminder[0]!=null" id="reminderBox">
             <span id="clockicon"><md-icon md-menu-trigger>schedule</md-icon></span>
             <span id="datetime">{{note.reminder[0].slice(0,24)}}</span>
-            <span id="closeicon"><md-icon md-menu-trigger>highlight_off</md-icon></span>
+            <span id="closeicon"><md-icon @click.native="removeReminder(note.id)">highlight_off</md-icon></span>
         </div><br>
         <div v-if="iconCategory == 'trash'" class="notebox-icons">
           <DeleteForeverIcon v-bind:noteId="note.id" />
@@ -44,6 +44,7 @@ import RestoreTrashIcon from "./RestoreTrashIcon";
 import UpdateNote from "./UpdateNote";
 import UnarchiveIcon from "./UnarchiveIcon";
 import ReminderIcon from './ReminderIcon';
+import NoteService from '../services/NoteService';
 import { eventBus } from "../main";
 
 export default {
@@ -71,6 +72,14 @@ export default {
       this.showUpdateBox = true;
       this.noteData = note;
     },
+    removeReminder:function(noteId){
+      const reminderData={
+        noteIdList:[noteId],
+      }
+      NoteService.removeReminder(reminderData).then(()=>{
+        eventBus.$emit("getUpdatedNoteList");
+      })
+    }
   },
   created() {
     eventBus.$on("closeDialogBox", (data) => {

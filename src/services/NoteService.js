@@ -52,6 +52,10 @@ class NoteService{
     getReminderList(){
         return httpservice.get('notes/getReminderNotesList')
     }
+
+    removeReminder(reminderData){
+        return httpservice.post('notes/removeReminderNotes',reminderData)
+    }
 }
 
 export default new NoteService
