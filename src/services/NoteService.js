@@ -48,6 +48,10 @@ class NoteService{
     addReminder(reminderData){
         return httpservice.post('notes/addUpdateReminderNotes',reminderData)
     }
+
+    getReminderList(){
+        return httpservice.get('notes/getReminderNotesList')
+    }
 }
 
 export default new NoteService

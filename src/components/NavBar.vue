@@ -135,6 +135,9 @@ export default {
       if (selectedOption == "Archive") {
         this.$router.push("archive");
       }
+      if (selectedOption == "Reminders") {
+        this.$router.push("reminder");
+      }
     },
     signout: function () {
       localStorage.removeItem("token");

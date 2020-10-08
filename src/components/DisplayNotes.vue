@@ -4,10 +4,15 @@
       <md-card class="cards" v-bind:style="{ background: note.color }">
         <div class="card-items" @click="updateBoxData(note)">
           <label class="content">{{ note.title }}</label
-          ><br />
+          >
           <label class="description content">{{ note.description }}</label
-          ><br />
+          >
         </div>
+        <div v-if="note.reminder[0]!=null" id="reminderBox">
+            <span id="clockicon"><md-icon md-menu-trigger>schedule</md-icon></span>
+            <span id="datetime">{{note.reminder[0].slice(0,24)}}</span>
+            <span id="closeicon"><md-icon md-menu-trigger>highlight_off</md-icon></span>
+        </div><br>
         <div v-if="iconCategory == 'trash'" class="notebox-icons">
           <DeleteForeverIcon v-bind:noteId="note.id" />
           <RestoreTrashIcon v-bind:noteId="note.id" />
@@ -143,6 +148,38 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+#reminderBox{
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+  background-color: rgb(226, 226, 226);
+  border-radius:18px ;
+  height: 40px;
+  margin-left: 3%;
+}
+
+#clockicon{
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+#closeicon{
+  width: 20%;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+}
+
+#reminderBox:hover>#closeicon{
+  visibility: visible;
+}
+
+#datetime{
+  width: 60%;
+  font-size: x-small;
 }
 
 @media screen and (max-width: 420px){

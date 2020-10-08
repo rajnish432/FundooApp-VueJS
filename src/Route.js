@@ -3,6 +3,7 @@ import FundooMain from './components/FundooHome';
 import Note from './components/Note';
 import Trash from './components/Trash';
 import Archive from './components/Archive';
+import Reminders from './components/Reminders'
 
 export default [
     { path: '/', component: UserLogin },
@@ -11,7 +12,8 @@ export default [
         children: [
             { path: 'note', component: Note },
             { path: 'trash', component: Trash },
-            { path: 'archive', component: Archive }
+            { path: 'archive', component: Archive },
+            {path:'reminder',component:Reminders},
         ]
     }
 ]

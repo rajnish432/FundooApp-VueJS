@@ -1,0 +1,50 @@
+@import "~vue-material/src/components/MdAnimation/variables.scss";
+@import "~vue-material/src/theme/engine";
+
+.reminder-content{
+    display: flex;
+    width: 300px;
+    padding: 10px;
+    font-size: medium;
+    background-color: white;
+}
+
+.md-menu-content {
+    max-width: none;
+    max-height: none;
+}
+
+.reminder-item{
+    display: flex;
+    width: 100%;
+    font-size: xx-small;
+    display: flex;
+    flex-direction: row;
+}
+
+.reminder-item:hover{
+    background-color: #EBEBEB;
+}
+
+.times{
+    color: grey;
+    opacity: 0.6;
+}
+
+.duration{
+    font-size: smaller;
+}
+
+#datetime-picker{
+    margin-top: -15px;
+    display: flex;
+    flex-direction: row;
+    width: 92%;
+    position: fixed;
+}
+
+@media (max-width:450px){
+    .reminder-content{
+        left:89px !important;
+    }
+}
