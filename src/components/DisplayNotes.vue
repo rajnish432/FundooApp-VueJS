@@ -17,6 +17,7 @@
         </div>
         <div v-else class="notebox-icons">
           <ColorPaletteIcon v-bind:note="note.id" />
+          <ReminderIcon v-bind:note="note.id"/>
           <ArchiveIcon v-bind:note="note.id" />
           <DeleteIcon v-bind:note="note.id" />
         </div>
@@ -37,6 +38,7 @@ import DeleteForeverIcon from "./DeleteForeverIcon";
 import RestoreTrashIcon from "./RestoreTrashIcon";
 import UpdateNote from "./UpdateNote";
 import UnarchiveIcon from "./UnarchiveIcon";
+import ReminderIcon from './ReminderIcon';
 import { eventBus } from "../main";
 
 export default {
@@ -57,6 +59,7 @@ export default {
     RestoreTrashIcon,
     UpdateNote,
     UnarchiveIcon,
+    ReminderIcon,
   },
   methods: {
     updateBoxData: function (note) {

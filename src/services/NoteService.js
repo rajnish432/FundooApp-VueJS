@@ -44,6 +44,10 @@ class NoteService{
     changeCardColor(colorData){
         return httpservice.post('notes/changesColorNotes',colorData)
     }
+
+    addReminder(reminderData){
+        return httpservice.post('notes/addUpdateReminderNotes',reminderData)
+    }
 }
 
 export default new NoteService
