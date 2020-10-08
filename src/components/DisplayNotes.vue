@@ -78,7 +78,7 @@ export default {
           "cards"
         )
         for( var i=0;i<styleProperty.length;i++){
-          styleProperty[i].style["width"]="90%"
+          styleProperty[i].style["width"]="80%"
         }
       }
       if (data == false) {
@@ -89,7 +89,7 @@ export default {
           "cards"
         )
         for( var j=0;j<styleProp.length;j++){
-          styleProp[j].style["width"]="190px"
+          styleProp[j].style["width"]="300px"
         }
       }
     });
@@ -102,7 +102,7 @@ export default {
   margin-top: 1%;
   margin-left: 20%;
   flex-direction: row;
-  width: 70%;
+  width: 80%;
   flex-wrap: wrap;
 }
 
@@ -117,7 +117,7 @@ export default {
 .cards {
   margin: 10px;
   padding: 18px;
-  width: 190px;
+  width: 300px;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   border-radius: 10px;
@@ -145,10 +145,6 @@ export default {
 @media screen and (max-width: 420px){
   .display-notes{
     width: 80%;
-  }
-
-  .cards{
-    width: auto;
   }
 }
 </style>

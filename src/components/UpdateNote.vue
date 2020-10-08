@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-dialog :md-active.sync="showUpdateBox">
-      <md-card id="note-card">
+      <md-card id="note-card" v-bind:style="{ background: color }">
         <md-field> <md-input v-model="title"></md-input> </md-field><br />
         <md-field>
           <md-textarea
@@ -11,7 +11,7 @@
         ><br />
         <div class="notebox-icons">
           <span>
-            <ColorPaletteIcon />
+            <ColorPaletteIcon v-bind:note="noteId" />
             <ArchiveIcon v-bind:note="noteId" />
           </span>
           <button @click="closeDialogBox">Close</button>
@@ -33,6 +33,7 @@ export default {
       title: "",
       description: "",
       noteId: "",
+      color:'',
     };
   },
   methods: {
@@ -44,7 +45,6 @@ export default {
       };
       NoteService.updateNotes(updateData).then(() => {
         this.showUpdateBox = false;
-        this.isArchived=false;
         eventBus.$emit("closeDialogBox", this.showUpdateBox);
         eventBus.$emit("getUpdatedNoteList");
       });
@@ -55,12 +55,18 @@ export default {
     this.noteId = this.$props.noteData.id;
     this.title = this.$props.noteData.title;
     this.description = this.$props.noteData.description;
+    this.color=this.$props.noteData.color;
   },
 
   components: {
     ColorPaletteIcon,
     ArchiveIcon,
   },
+  created(){
+    eventBus.$on("getUpdated", (data) => {
+      this.color = data;
+    });
+  }
 };
 </script>
 <style scoped>

@@ -44,7 +44,9 @@ export default {
     setColor: function (colorId) {
       if (this.createNote == true) {
         eventBus.$emit("getColorUpdated", colorId);
-      } else {
+      }
+      else {
+        eventBus.$emit("getUpdated", colorId);
         const colorData = {
           color: colorId,
           noteIdList: [this.note],
@@ -67,6 +69,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  z-index: 9999;
   width: 12%;
   min-height: fit-content;
   position: absolute;

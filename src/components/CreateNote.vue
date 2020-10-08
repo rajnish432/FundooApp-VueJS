@@ -167,9 +167,9 @@ span {
 
 @media screen and (max-width: 480px) {
   .note {
-    min-width: 78%;
+    min-width: 83%;
     padding: 20px;
-    margin-left: 22%;
+    margin-left: 32%;
   }
 }
 </style>
