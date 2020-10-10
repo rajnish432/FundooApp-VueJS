@@ -10,10 +10,58 @@ export default [
     {
         path: '/home', component: FundooMain,
         children: [
-            { path: 'note', component: Note },
-            { path: 'trash', component: Trash },
-            { path: 'archive', component: Archive },
-            {path:'reminder',component:Reminders},
+            {
+                path: 'note',
+                component: Note,
+                beforeEnter(to, from, next) {
+                    if (localStorage.getItem("token") == undefined) {
+                        next({
+                            path: '/'
+                        })
+                    } else {
+                        next()
+                    }
+                }
+            },
+            {
+                path: 'trash',
+                component: Trash,
+                beforeEnter(to, from, next) {
+                    if (localStorage.getItem("token") == undefined) {
+                        next({
+                            path: '/'
+                        })
+                    } else {
+                        next()
+                    }
+                }
+            },
+            {
+                path: 'archive', 
+                component: Archive,
+                beforeEnter(to, from, next) {
+                    if (localStorage.getItem("token") == undefined) {
+                        next({
+                            path: '/'
+                        })
+                    } else {
+                        next()
+                    }
+                }
+            },
+            {
+                path: 'reminder',
+                component: Reminders,
+                beforeEnter(to, from, next) {
+                    if (localStorage.getItem("token") == undefined) {
+                        next({
+                            path: '/'
+                        })
+                    } else {
+                        next()
+                    }
+                }
+            },
         ]
     }
 ]

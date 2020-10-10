@@ -28,9 +28,6 @@ export default {
     },
   },
   created() {
-    if (localStorage.getItem("token") == undefined) {
-      this.$router.push("/");
-    }
     this.fetchReminderList();
     eventBus.$on("searchCard", (data) => {
       this.searchText=data;
