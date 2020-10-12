@@ -5,6 +5,15 @@ import Trash from './components/Trash';
 import Archive from './components/Archive';
 import Reminders from './components/Reminders'
 
+function beforeEnter(to, from, next) {
+    if (localStorage.getItem("token") == undefined || localStorage.getItem("token") == "" || localStorage.getItem("token") == null) {
+        next({
+            path: '/'
+        })
+    } else {
+        next()
+    }
+}
 export default [
     { path: '/', component: UserLogin },
     {
@@ -13,54 +22,22 @@ export default [
             {
                 path: 'note',
                 component: Note,
-                beforeEnter(to, from, next) {
-                    if (localStorage.getItem("token") == undefined) {
-                        next({
-                            path: '/'
-                        })
-                    } else {
-                        next()
-                    }
-                }
+                beforeEnter
             },
             {
                 path: 'trash',
                 component: Trash,
-                beforeEnter(to, from, next) {
-                    if (localStorage.getItem("token") == undefined) {
-                        next({
-                            path: '/'
-                        })
-                    } else {
-                        next()
-                    }
-                }
+                beforeEnter
             },
             {
-                path: 'archive', 
+                path: 'archive',
                 component: Archive,
-                beforeEnter(to, from, next) {
-                    if (localStorage.getItem("token") == undefined) {
-                        next({
-                            path: '/'
-                        })
-                    } else {
-                        next()
-                    }
-                }
+                beforeEnter
             },
             {
                 path: 'reminder',
                 component: Reminders,
-                beforeEnter(to, from, next) {
-                    if (localStorage.getItem("token") == undefined) {
-                        next({
-                            path: '/'
-                        })
-                    } else {
-                        next()
-                    }
-                }
+                beforeEnter
             },
         ]
     }
