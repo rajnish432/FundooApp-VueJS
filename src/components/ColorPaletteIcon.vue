@@ -4,29 +4,12 @@
       <md-icon md-menu-trigger>palette</md-icon>
       <md-menu-content>
         <div class="color-items">
-          <div class="color-tray" id="red" @click="setColor('#F28B82')"></div>
           <div
             class="color-tray"
-            id="orange"
-            @click="setColor('#FBBC04')"
-          ></div>
-          <div
-            class="color-tray"
-            id="yellow"
-            @click="setColor('#FFF475')"
-          ></div>
-          <div class="color-tray" id="green" @click="setColor('#CCFF90')"></div>
-          <div
-            class="color-tray"
-            id="purple"
-            @click="setColor('#D7AEFB')"
-          ></div>
-          <div class="color-tray" id="cyan" @click="setColor('#A7FFEB')"></div>
-          <div class="color-tray" id="blue" @click="setColor('#CBF0F8')"></div>
-          <div
-            class="color-tray"
-            id="transparent"
-            @click="setColor('#FFFFFF')"
+            v-for="(color, index) in colorArray"
+            v-bind:key="index"
+            v-bind:style="{ background: color.color }"
+            @click="setColor(color.color)"
           ></div>
         </div>
       </md-menu-content>
@@ -40,12 +23,25 @@ import NoteService from "../services/NoteService";
 export default {
   name: "ColorPaletteIcon",
   props: ["note", "createNote"],
+  data() {
+    return {
+      colorArray: [
+        { color: "#F28B82" },
+        { color: "#FBBC04" },
+        { color: "#FFF475" },
+        { color: "#CCFF90" },
+        { color: "#D7AEFB" },
+        { color: "#A7FFEB" },
+        { color: "#CBF0F8" },
+        { color: "#FFFFFF" },
+      ],
+    };
+  },
   methods: {
     setColor: function (colorId) {
       if (this.createNote == true) {
         eventBus.$emit("getColorUpdated", colorId);
-      }
-      else {
+      } else {
         eventBus.$emit("getUpdated", colorId);
         const colorData = {
           color: colorId,
@@ -88,37 +84,5 @@ export default {
   border-radius: 50%;
   margin: 2px;
   border: 1px solid rgb(204, 204, 204);
-}
-
-#red {
-  background-color: #f28b82;
-}
-
-#orange {
-  background-color: #fbbc04;
-}
-
-#yellow {
-  background-color: #fff475;
-}
-
-#green {
-  background-color: #ccff90;
-}
-
-#cyan {
-  background-color: #a7ffeb;
-}
-
-#blue {
-  background-color: #cbf0f8;
-}
-
-#purple {
-  background-color: #d7aefb;
-}
-
-#transparent {
-  background-color: #ffffff;
 }
 </style>
